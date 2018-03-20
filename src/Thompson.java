@@ -1,6 +1,10 @@
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class Thompson {
+
+
+
 
     public static NFA kleene(NFA current){
         NFA newNFA = new NFA(current.states.size()+2);
@@ -140,17 +144,178 @@ public class Thompson {
         return true;
     }
 
-    public static NFA generateNFA(String regex){
+    public NFA generateNFA(String regex){
 
         if(!validateRegEx(regex)){
             System.out.println("INVALID regular expression");
             return new NFA();
         }
 
+
         Stack <Character> operators = new Stack<>();
         Stack <NFA> operands = new Stack<>();
         Stack <NFA> waitedNFA = new Stack<>();
+        boolean concatFlag = false;
+        char op,c;
+        int count = 0;
+        NFA first,second;
+
+        for (int i = 0; i < regex.length() ; i++){
+
+            c = regex.charAt(i);
+            if(isOperand(c)) {
+                operands.push(new NFA(c));
+                if (concatFlag) {
+
+                    operators.push('.');
+                } else {
+
+                    concatFlag = true;
+
+                }
+
+            }
+
+            else{
+
+                if(c == ')'){
+                    concatFlag = false;
+                    if(count == 0){
+
+                        System.out.println("ERROR : more ending paranthesis than beginning paranthesis");
+                        System.exit(2);
+
+                    }
+
+                    else{
+
+                        count--;
+
+                    }
+
+                    while(!operators.isEmpty() && operators.peek() != '('){
+                        op = operators.pop();
+                        if(op == '.'){
+
+                            first = operands.pop();
+                            second = operands.pop();
+                            operands.push(concat(second,first));
+                        }
+                        else if(op == '|'){
+
+                            second = operands.pop();
+                            if(!operators.isEmpty()&& operators.peek() != '.'){
+
+                                waitedNFA.push(operands.pop());
+
+                                while(!operators.isEmpty() && operators.peek() != '.'){
+
+                                    waitedNFA.push(operands.pop());
+                                    operators.pop();
+
+                                }
+
+                                first = concat(waitedNFA.pop(),waitedNFA.pop());
+
+                                while(!waitedNFA.isEmpty()){
+
+                                    first = concat(first,waitedNFA.pop());
+                                }
+
+                            }
+
+                            else {
 
 
+                                first = operands.pop();
+
+                            }
+                            operands.push(union(first,second));
+
+                        }
+
+
+                    }
+
+                }
+
+                else if(c == '*'){
+
+                    operands.push(kleene(operands.pop()));
+                    concatFlag = true;
+                }
+
+                else if(c == '+'){
+
+                    operands.push(positive(operands.pop()));
+                    concatFlag = true;
+                }
+
+                else if(c == '('){
+
+                    operators.push(c);
+                    count++;
+                }
+
+                else if(c == '|'){
+
+                    operators.push(c);
+                    concatFlag = false;
+
+                }
+
+            }
+        }
+
+        while(operators.size() > 0){
+
+            if(operands.isEmpty()){
+
+                System.out.println("imbalance operands and operators ya rania matetzakee4 3lna 3eeb !!");
+                System.exit(3);
+            }
+
+            op = operators.pop();
+            if(op == '.'){
+
+                first = operands.pop();
+                second = operands.pop();
+                operands.push(concat(first,second));
+
+            }
+
+            else if(op == '|'){
+                second = operands.pop();
+
+                if(!operators.isEmpty() && operators.peek() == '.'){
+
+                    waitedNFA.push(operands.pop());
+                    while(!operators.isEmpty() && operators.peek() == '.'){
+
+                        waitedNFA.push(operands.pop());
+                        operators.pop();
+                    }
+
+                    first = concat(waitedNFA.pop(),waitedNFA.pop());
+
+                    while (!waitedNFA.empty()){
+
+                        first = concat(first,waitedNFA.pop());
+                    }
+                }
+
+                else {
+
+                    first = operands.pop();
+                }
+
+                operands.push(union(first,second));
+
+
+
+            }
+        }
+
+        return operands.pop();
     }
 }

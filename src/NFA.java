@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class NFA {
 
-    public  ArrayList<Integer> states;
+    public ArrayList<Integer> states;
     public ArrayList<trans> transitions;
     public int finalState;
 
@@ -36,6 +36,7 @@ public class NFA {
 
     public void addStatesSize(int size) {
 
+
         for (int i = 0; i < size; i++)
             this.states.add(i);
 
@@ -46,17 +47,7 @@ public class NFA {
             System.out.println("(" + t.stateFrom + ", " + t.symp +
                     ", " + t.stateTo + ")");
         }
-    }
-    public ArrayList<Integer> get_transitions(char c){       //get transitions by character
-            ArrayList<Integer> T;
-            T = new ArrayList<>();
-            for(trans t: transitions)
-            {
-                if(t.get_next_state(c) != -1){
-                  T.add(t.get_next_state(c));
-                }
-            }
-            return T;
-        }
 
     }
+}
+

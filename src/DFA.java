@@ -24,41 +24,41 @@ import java.util.Stack;
         public void add_state(int state_id){
             this.states.add(state_id);
         }
-        public boolean is_acceptance_state(){
+       // public boolean is_acceptance_state(){
 
-        }
-        public void epsilon_closure (){
+        //}
+     //   public void epsilon_closure (){
 
-            ArrayList<trans> transitions = nfa.transitions;
-            ArrayList<Integer> st = nfa.states;
-            //int last_state = nfa.finalState;
-            this.stack = new Stack<>();
-            for(int i : st){
-                stack.push(i);
-            }
-
-            while (!stack.isEmpty()) {
-
-                int top_state = stack.pop();
-
-
-                }
-
-
-
-
-        }
-
-        public DFA generate_DFA (NFA nfa){
-
-
-
-
+//            ArrayList<trans> transitions = nfa.transitions;
+//            ArrayList<Integer> st = nfa.states;
+//            int last_state = nfa.finalState;
+//            this.stack = new Stack<>();
+//            for(int i : st){
+//                stack.push(i);
+//            }
+//
+//            while (!stack.isEmpty()) {
+//
+//                int top_state = stack.pop();
+//
+//
+//                }
 
 
 
 
         }
 
+        //public DFA generate_DFA (NFA nfa){
 
-}
+
+
+
+
+
+
+
+      //  }
+
+
+//}
