@@ -23,7 +23,7 @@ public class NFA {
 
     }
 
-    public NFA(char c) {
+    public NFA(ArrayList c) {
 
         this.states = new ArrayList<Integer>();
         this.transitions = new ArrayList<trans>();

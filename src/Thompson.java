@@ -3,12 +3,14 @@ import java.util.Stack;
 
 public class Thompson {
 
+    public static ArrayList <Character> tChar = new ArrayList<>();
 
 
 
     public static NFA kleene(NFA current){
         NFA newNFA = new NFA(current.states.size()+2);
-        newNFA.transitions.add(new trans(0,1,'~'));
+        tChar.add('~');
+        newNFA.transitions.add(new trans(0,1,tChar));
 
         for (trans t :current.transitions) {
 
@@ -16,27 +18,28 @@ public class Thompson {
 
         }
 
-        newNFA.transitions.add(new trans(current.states.size() , current.states.size() + 1 , '~'));
-        newNFA.transitions.add(new trans(current.states.size(),1 ,'~'));
-        newNFA.transitions.add(new trans(0 , current.states.size() + 1 , '~'));
+        newNFA.transitions.add(new trans(current.states.size() , current.states.size() + 1 , tChar));
+        newNFA.transitions.add(new trans(current.states.size(),1 ,tChar));
+        newNFA.transitions.add(new trans(0 , current.states.size() + 1 ,  tChar));
         newNFA.finalState = current.states.size() + 1;
-
+        tChar.clear();
         return newNFA;
 
     }
 
     public static NFA question(NFA current){
         NFA newNFA =  new NFA(current.states.size() + 2);
-        newNFA.transitions.add(new trans(0,1,'~'));
+        tChar.add('~');
+        newNFA.transitions.add(new trans(0,1,tChar));
         for (trans t : current.transitions){
             newNFA.transitions.add(new trans(t.stateFrom + 1 ,t.stateTo + 1,t.symp));
 
         }
 
-        newNFA.transitions.add(new trans(current.states.size() ,current.states.size() + 1 ,'~'));
-        newNFA.transitions.add(new trans(0 ,current.states.size() + 1 ,'~'));
+        newNFA.transitions.add(new trans(current.states.size() ,current.states.size() + 1 ,tChar));
+        newNFA.transitions.add(new trans(0 ,current.states.size() + 1 ,tChar));
         newNFA.finalState=current.states.size() + 1;
-
+        tChar.clear();
         return newNFA;
     }
 
@@ -60,9 +63,9 @@ public class Thompson {
     }
 
     public static NFA positive(NFA current){
-
+        tChar.add('~');
         NFA newNFA = new NFA(current.states.size()+2);
-        newNFA.transitions.add(new trans(0,1,'~'));
+        newNFA.transitions.add(new trans(0,1,tChar));
 
         for (trans t :current.transitions) {
 
@@ -70,20 +73,20 @@ public class Thompson {
 
         }
 
-        newNFA.transitions.add(new trans(current.states.size() , current.states.size() + 1 , '~'));
-        newNFA.transitions.add(new trans(current.states.size(),1 ,'~'));
+        newNFA.transitions.add(new trans(current.states.size() , current.states.size() + 1 , tChar));
+        newNFA.transitions.add(new trans(current.states.size(),1 ,tChar));
 
         newNFA.finalState = current.states.size() + 1;
-
+        tChar.clear();
         return newNFA;
 
     }
 
 
     public static NFA union(NFA first,NFA second){
-
+        tChar.add('~');
         NFA unioned = new NFA(first.states.size() + second.states.size() + 2);
-        unioned.transitions.add(new trans(0,1,'~'));
+        unioned.transitions.add(new trans(0,1,tChar));
 
         for (trans  t:first.transitions){
 
@@ -91,11 +94,11 @@ public class Thompson {
 
         }
 
-        unioned.transitions.add(new trans(first.states.size(),first.states.size()+second.states.size()+1,'~'));
+        unioned.transitions.add(new trans(first.states.size(),first.states.size()+second.states.size()+1,tChar));
 
 
 
-        unioned.transitions.add(new trans(0,first.states.size()+1,'~'));
+        unioned.transitions.add(new trans(0,first.states.size()+1,tChar));
 
         for (trans  t:second.transitions){
 
@@ -103,10 +106,10 @@ public class Thompson {
 
         }
 
-        unioned.transitions.add(new trans(first.states.size()+ second.states.size(),first.states.size() + second.states.size()+1,'~'));
+        unioned.transitions.add(new trans(first.states.size()+ second.states.size(),first.states.size() + second.states.size()+1,tChar));
 
         unioned.finalState = first.finalState + second.finalState + 1;
-
+        tChar.clear();
         return unioned;
 
     }
@@ -114,7 +117,7 @@ public class Thompson {
     public static boolean Calpha(char c) {return c >= 'A' && c <='Z';}
     public static boolean isOperand(char c) {return alpha(c) || Calpha(c)|| Character.isDigit(c) || c == '~'; }
     public static boolean isOperator(char c){
-        return c == '(' || c == ')' || c == '*' || c == '+' || c == '|' ;
+        return c == '(' || c == ')' || c == '*' || c == '+' || c == '|' || c == '[' || c == ']' || c == '-';
 
     }
 
@@ -158,14 +161,56 @@ public class Thompson {
         boolean concatFlag = false;
         char op,c;
         int count = 0;
+        boolean sBrackets = false;
+        int sBcount = 0;
         NFA first,second;
+
 
         for (int i = 0; i < regex.length() ; i++){
 
             c = regex.charAt(i);
-            if(isOperand(c)) {
-                operands.push(new NFA(c));
-                if (concatFlag) {
+            if(c == '['){
+
+                sBrackets = true;
+
+            }
+            else if(sBrackets && isOperand(c)){
+                operators.push(c);
+
+            }
+
+            else if(c == '-'){
+
+                concatFlag = false;
+                operators.push(c);
+
+            }
+            else if(c == ']'){
+                if(!sBrackets){
+                    System.out.println("a7na bnen2el sheets m4 a8bya ya rania unequal square brackets");
+                    System.exit(4);
+                }
+                else {
+
+
+                    char c1 = operators.pop();
+                    operators.pop();
+                    char c2 = operators.pop();
+                    for (int i1 = (int)c2; i1 <= (int)c1; i1++) {
+
+                        tChar.add((char)i1);
+                    }
+                    operands.push(new NFA(tChar));
+                    tChar.clear();
+                    sBrackets = false;
+                }
+            }
+            else if(isOperand(c) && !sBrackets) {
+                tChar.add(c);
+
+                operands.push(new NFA(tChar));
+                tChar.clear();
+                if (concatFlag && !sBrackets) {
 
                     operators.push('.');
                 } else {
@@ -200,13 +245,16 @@ public class Thompson {
                             first = operands.pop();
                             second = operands.pop();
                             operands.push(concat(second,first));
+
                         }
                         else if(op == '|'){
 
                             second = operands.pop();
-                            if(!operators.isEmpty()&& operators.peek() != '.'){
+
+                            if(!operators.isEmpty()&& operators.peek() == '.'){
 
                                 waitedNFA.push(operands.pop());
+
 
                                 while(!operators.isEmpty() && operators.peek() != '.'){
 
@@ -278,8 +326,8 @@ public class Thompson {
             op = operators.pop();
             if(op == '.'){
 
-                first = operands.pop();
                 second = operands.pop();
+                first= operands.pop();
                 operands.push(concat(first,second));
 
             }
