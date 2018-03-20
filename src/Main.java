@@ -14,8 +14,8 @@ public class Main {
         System.out.println("\nNFA:");
         nfa_input.display();
         DFA dfa = new DFA(nfa_input);
-        ArrayList<trans> dfa_output = dfa.epsilon_closure();
-        dfa.get_initial_transitions();
+        dfa.generate_DFA();
+
     }
 
 
