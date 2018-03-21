@@ -127,24 +127,12 @@ public class Thompson {
     }
 
     public static boolean validateRegEx(String regEx){
-        //boolean valid = false;
+
         if(regEx.isEmpty()){
             System.out.print("your regular expression is empty ya rania bla4 8abawa!!!");
             return false;
 
         }
-        for(char c :regEx.toCharArray()){
-            if( c == '*' || c == '+' || c == '|' || c == '-'){
-                System.out.println("invalid expression");
-                System.exit(7);
-
-            }
-            else {
-
-                break;
-            }
-        }
-
 
         for(char c: regEx.toCharArray()){
 
@@ -184,7 +172,6 @@ public class Thompson {
             if(c == '['){
 
                 sBrackets = true;
-                //concatFlag = true;
 
             }
             else if(sBrackets && isOperand(c)){
@@ -194,7 +181,7 @@ public class Thompson {
 
             else if(c == '-'){
 
-                //concatFlag = false;
+                concatFlag = false;
                 operators.push(c);
 
             }
@@ -216,20 +203,10 @@ public class Thompson {
                     operands.push(new NFA(tChar));
                     tChar.clear();
                     sBrackets = false;
-                    //concatFlag = true;
-                    sBcount++;
-                    if(sBcount%2 == 0){
-                        operators.push('.');
-                    }
                 }
             }
             else if(isOperand(c) && !sBrackets) {
                 tChar.add(c);
-                sBcount++;
-                if (sBcount%2==0){
-
-                    operators.push('.');
-                }
 
                 operands.push(new NFA(tChar));
                 tChar.clear();
@@ -368,7 +345,6 @@ public class Thompson {
                     }
 
                     first = concat(waitedNFA.pop(),waitedNFA.pop());
-
                     while (!waitedNFA.empty()){
 
                         first = concat(first,waitedNFA.pop());

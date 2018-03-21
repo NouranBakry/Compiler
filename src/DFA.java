@@ -84,40 +84,56 @@ import java.util.Stack;
             System.out.println("Function Move:");
             print(states);
             return states;
-
-
         }
         public void generate_DFA (){
-            ArrayList<trans>initial = get_initial_transitions(nfa.transitions);
-//            ArrayList<trans> nfa_start = new ArrayList<>();
-//            nfa_start.add(nfa.transitions.get(0));
-            ArrayList<trans>Result = epsilon_closure(initial);
-            this.state_id =0;
-            this.transitions = Result;
-            for(trans t: Result){
-                ArrayList<Character> c;
-                c = new ArrayList<>(t.symp);
-                ArrayList<trans> n = move(Result,c);
+
+            this.state_id = 0;
+            ArrayList<ArrayList>input = new ArrayList<>();
+            for(trans t: nfa.transitions){
+                input.add(t.symp);
             }
+            Stack <trans> unmarked = new Stack <>();
+            ArrayList<trans>initial = get_initial_transitions(nfa.transitions);
+            ArrayList<trans> Result = epsilon_closure(initial);
+            for (trans t: Result){
+                unmarked.push(t);
+            }
+            for(trans t: unmarked){
+                System.out.println("Unmarked Stack:");
+                System.out.println("(" + t.stateFrom + ", " + t.symp +
+                        ", " + t.stateTo + ")");
+            }
+            while(!unmarked.isEmpty()){
+                trans s = unmarked.pop();
+                ArrayList<trans> a = new ArrayList<>();
+                a.add(s);
+                for(int i=0;i<input.size();i++){
+                    move(a,input.get(i));
+                }
+
+            }
+//            for(trans t: Result){
+//               ArrayList<Character> c;
+//               c = new ArrayList<>(t.symp);
+//               ArrayList<trans> n = move(Result,c);
+//            }
 //            ArrayList<Character> input;
 //            input = new ArrayList<>();
 //            input.add('a');
 
 
 //            ArrayList<trans>R = move(nfa.transitions,input);
-            ArrayList<Integer>a = is_accepting();
+              ArrayList<Integer> a = is_accepting();
         }
+
         public ArrayList<Integer> is_accepting(){
             ArrayList<Character> input;
             input = new ArrayList<>();
             input.add('~');
-
             ArrayList<Integer> accepting = new ArrayList<>();
             ArrayList<trans>states;
             states= new ArrayList<>(nfa.transitions);
-
             Stack<trans> accepting_stack = new Stack<>();
-
             for(trans t: states){
                 if(t.stateTo == nfa.finalState && t.symp.equals(input)){
                     accepting.add(t.stateFrom);
@@ -133,7 +149,6 @@ import java.util.Stack;
                     }
                 }
             }
-
             for(int i: accepting){
                 System.out.println("final state:" + nfa.finalState);
                 System.out.println("Accepting States");

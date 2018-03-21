@@ -36,7 +36,6 @@ public class NFA {
 
     public void addStatesSize(int size) {
 
-
         for (int i = 0; i < size; i++)
             this.states.add(i);
 
