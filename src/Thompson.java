@@ -6,7 +6,6 @@ public class Thompson {
     public static ArrayList <Character> tChar = new ArrayList<>();
 
 
-
     public static NFA kleene(NFA current){
         NFA newNFA = new NFA(current.states.size()+2);
         tChar.add('~');
@@ -21,7 +20,7 @@ public class Thompson {
         newNFA.transitions.add(new trans(current.states.size() , current.states.size() + 1 , tChar));
         newNFA.transitions.add(new trans(current.states.size(),1 ,tChar));
         newNFA.transitions.add(new trans(0 , current.states.size() + 1 ,  tChar));
-        newNFA.finalState = current.states.size() + 1;
+        newNFA.finalState = current.states.size() + 2;
         tChar.clear();
         return newNFA;
 
@@ -56,7 +55,7 @@ public class Thompson {
             first.states.add(state + first.states.size() + 1);
         }
 
-        first.finalState = (first.finalState - 1) + (second.finalState -1);
+        first.finalState = (first.finalState - 1) + (second.finalState);
 
         return first;
 
@@ -76,7 +75,7 @@ public class Thompson {
         newNFA.transitions.add(new trans(current.states.size() , current.states.size() + 1 , tChar));
         newNFA.transitions.add(new trans(current.states.size(),1 ,tChar));
 
-        newNFA.finalState = current.states.size() + 1;
+        newNFA.finalState = current.states.size() + 2;
         tChar.clear();
         return newNFA;
 
@@ -108,7 +107,7 @@ public class Thompson {
 
         unioned.transitions.add(new trans(first.states.size()+ second.states.size(),first.states.size() + second.states.size()+1,tChar));
 
-        unioned.finalState = first.finalState + second.finalState + 1;
+        unioned.finalState = first.finalState + second.finalState + 2;
         tChar.clear();
         return unioned;
 
@@ -127,12 +126,24 @@ public class Thompson {
     }
 
     public static boolean validateRegEx(String regEx){
-
+        //boolean valid = false;
         if(regEx.isEmpty()){
             System.out.print("your regular expression is empty ya rania bla4 8abawa!!!");
             return false;
 
         }
+        for(char c :regEx.toCharArray()){
+            if( c == '*' || c == '+' || c == '|' || c == '-'){
+                System.out.println("invalid expression");
+                System.exit(7);
+
+            }
+            else {
+
+                break;
+            }
+        }
+
 
         for(char c: regEx.toCharArray()){
 
@@ -172,6 +183,7 @@ public class Thompson {
             if(c == '['){
 
                 sBrackets = true;
+                //concatFlag = true;
 
             }
             else if(sBrackets && isOperand(c)){
@@ -181,7 +193,7 @@ public class Thompson {
 
             else if(c == '-'){
 
-                concatFlag = false;
+                //concatFlag = false;
                 operators.push(c);
 
             }
@@ -203,14 +215,25 @@ public class Thompson {
                     operands.push(new NFA(tChar));
                     tChar.clear();
                     sBrackets = false;
+                    //concatFlag = true;
+                    sBcount++;
+                    if(sBcount%2 == 0){
+                        operators.push('.');
+                    }
                 }
             }
             else if(isOperand(c) && !sBrackets) {
                 tChar.add(c);
-
+                sBcount++;
                 operands.push(new NFA(tChar));
                 tChar.clear();
-                if (concatFlag && !sBrackets) {
+                if (sBcount%2==0){
+
+                    operators.push('.');
+                }
+
+
+                else if (concatFlag && !sBrackets) {
 
                     operators.push('.');
                 } else {
@@ -309,6 +332,7 @@ public class Thompson {
 
                     operators.push(c);
                     concatFlag = false;
+                    sBcount --;
 
                 }
 
@@ -345,6 +369,7 @@ public class Thompson {
                     }
 
                     first = concat(waitedNFA.pop(),waitedNFA.pop());
+
                     while (!waitedNFA.empty()){
 
                         first = concat(first,waitedNFA.pop());
@@ -363,6 +388,20 @@ public class Thompson {
             }
         }
 
-        return operands.pop();
+
+        for (String name : decider.NFAused.keySet()) {
+
+            operands.push(decider.NFAused.get(name));
+
+        }
+        while(operands.size()>1){
+
+            operands.push(union(operands.pop(),operands.pop()));
+        }
+        System.out.println("LAST NEEDED : ");
+        NFA last = operands.pop();
+        last.display();
+
+        return last;
     }
 }
