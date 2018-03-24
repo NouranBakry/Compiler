@@ -1,26 +1,18 @@
 import java.util.ArrayList;
-import java.util.Stack;
 
 
     public class DFA {
 
         public ArrayList <DFA_State> states;
-        public ArrayList <Integer> accepting_states;
+        public int dead_state;
         public NFA nfa;
         public DFA (){
-            this.states = new ArrayList<DFA_State>();
+            this.states = new ArrayList<>();
         }
         public DFA (NFA nfa) {
-                this.states = new ArrayList<DFA_State>();
-                this.accepting_states = new ArrayList<>();
+                this.states = new ArrayList<>();
                 this.nfa = nfa ;
-        }
-        public void set_accepting_states(){
-            accepting_states = new ArrayList<>(is_accepting());
-            System.out.println("Accepting States");
-            for(int i:accepting_states){
-                System.out.println(i);
-            }
+                this.dead_state =0;
         }
 
         public void add_new_state(DFA_State d){
@@ -28,33 +20,12 @@ import java.util.Stack;
         }
 
 
-        public ArrayList<Integer> is_accepting(){
-            ArrayList<Integer> accepting = new ArrayList<>();
-            ArrayList<trans>states;
-            states= new ArrayList<>(nfa.transitions);
-            Stack<trans> accepting_stack = new Stack<>();
-            for(trans t: states){
-                if(t.stateTo == nfa.finalState && t.symp.contains('~')){
-                    accepting.add(t.stateFrom);
-                    accepting_stack.push(t);
-                }
-            }
-            while (!accepting_stack.isEmpty()){
-                trans i =accepting_stack.pop();
-                for(trans t: states){
-                    if(t.stateTo == i.stateFrom && t.symp.contains('~')){
-                        accepting_stack.push(t);
-                        accepting.add(t.stateFrom);
-                    }
-                }
-            }
-
-            return accepting;
-        }
         public void display_DFA() {
             System.out.println("DFA:");
+            System.out.println("Dead State: "+ dead_state );
             for (DFA_State t : states) {
                 System.out.println("( state_id: " + t.id + ", nfa_states:  " + t.nfa_states + ", state_to:  " + t.stateTo +", symbol:  "+ t.symbol + ")");
             }
         }
+
 }

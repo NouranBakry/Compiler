@@ -7,6 +7,9 @@ public class DFA_State {
     public ArrayList<Integer> stateTo;
     public ArrayList <String> symbol;
 
+//    public DFA_State(int id){
+//        this.id = id;
+//    }
     public DFA_State(int id,ArrayList<Integer>states){
         this.id = id;
         this.nfa_states = new ArrayList<>(states);
@@ -14,18 +17,5 @@ public class DFA_State {
         this.symbol = new ArrayList<>();
 
     }
-    public DFA_State(int id,ArrayList<Integer>states,int stateTo){
-        this.id = id;
-        this.nfa_states = new ArrayList<>(states);
-        //this.stateTo = stateTo;
-        //this.symbol = new ArrayList<>(symbol);
 
-    }
-    public DFA_State(int id,ArrayList<Integer>states,int stateTo, ArrayList<String> c){
-        this.id = id;
-        this.nfa_states = new ArrayList<>(states);
-        //this.stateTo = stateTo;
-        //this.symbol = new ArrayList<>(c);
-
-    }
 }

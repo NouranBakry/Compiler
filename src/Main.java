@@ -21,9 +21,15 @@ public class Main {
         System.out.println("\nNFA:");
         nfa_input.display();
         DFA dfa = new DFA(nfa_input);
-        dfa.set_accepting_states();
         Subset_Constructor s = new Subset_Constructor(nfa_input);
         DFA dfa_output = s.generate_DFA();
+//        DFA_Reducer d = new DFA_Reducer(dfa_output);
+//        d.BFS();
+//        d.partition();
+//        System.out.print("Transition table for the reduction DFA\n");
+//        System.out.println(d.toString());
+//        System.out.println();
+
 
 
     }
