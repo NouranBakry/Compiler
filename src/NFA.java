@@ -36,6 +36,7 @@ public class NFA {
 
     public void addStatesSize(int size) {
 
+
         for (int i = 0; i < size; i++)
             this.states.add(i);
 
@@ -43,7 +44,8 @@ public class NFA {
 
     public void display() {
         for (trans t : transitions) {
-            System.out.println("(" + t.stateFrom + ", " + t.symp + ", " + t.stateTo + ")");
+            System.out.println("(" + t.stateFrom + ", " + t.symp +
+                    ", " + t.stateTo + ")");
         }
 
     }

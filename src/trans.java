@@ -5,7 +5,7 @@ public class trans {
     public int stateFrom, stateTo;
     public ArrayList <Character> symp ;
 
-    public trans(int from, int to, ArrayList<Character>symbol) {
+    public trans(int from, int to, ArrayList symbol) {
 
         this.stateFrom = from;
         this.stateTo = to;
