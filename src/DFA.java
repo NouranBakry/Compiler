@@ -1,3 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -17,20 +21,30 @@ public class DFA {
         this.states.add(d);
     }
 
-    public void display_DFA() {
-        System.out.println("DFA:");
-        System.out.println("Dead State: 0" );
-        System.out.print("s ");
-        ArrayList<String> inputs = new ArrayList<>();
-        for(DFA_State d : states){
-            for(String s: d.symbol) {
-                if (!inputs.contains(s)) {
-                    inputs.add(s);
-                } }
-        }
-        System.out.println(inputs);
-        for(DFA_State d : states){
-            System.out.println(d.id+" "+d.stateTo);
+    public void display_DFA() throws  IOException {
+
+        try (FileWriter writer = new FileWriter("DFA_output.txt")) {
+            System.out.println("DFA:");
+            System.out.println("Dead State: 0");
+            System.out.print("s ");
+            writer.write("s ");
+            ArrayList<String> inputs = new ArrayList<>();
+            for (DFA_State d : states) {
+                for (String s : d.symbol) {
+                    if (!inputs.contains(s)) {
+                        inputs.add(s);
+                    }
+                }
+            }
+
+            writer.write(inputs.toString());
+            writer.write("\n");
+            System.out.println(inputs);
+            for (DFA_State d : states) {
+                System.out.println(d.id + " " + d.stateTo);
+                writer.write(d.id + " " + d.stateTo);
+                writer.write("\n");
+            }
         }
 
         System.out.print("\n");

@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         NFA last = new NFA();
         //BufferedReader reader=null;
         String fileName = "input2.txt";

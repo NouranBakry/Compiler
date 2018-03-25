@@ -2,17 +2,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Stack;
-import java.lang.NullPointerException;
 import java.util.ArrayList;
-
 
 public class Maximal_munch {
 
-    public static int state =0, i=0,forward,token_begining=0;
+    public static int state=0, i=0,forward,token_begining=0;
     public static int lexical_value;
     public static String test = new String();
-    public static String start=new String();
-    public static ArrayList<String>  states= new ArrayList<String> (),accept= new ArrayList <String>(),dead= new ArrayList <String>(),
+    public static String start="0",dead="7";
+    public static ArrayList<String>  states= new ArrayList<String> (),accept= new ArrayList <String>(),
             keywords= new ArrayList<String> (),relop= new ArrayList<String> (),punctuations= new ArrayList<String> (),
             addop= new ArrayList<String> (),mulop=new ArrayList<String> ();
     public static char c;
@@ -48,7 +46,7 @@ public class Maximal_munch {
             last_accept[0][0]="error";
             last_accept[0][1]=String.valueOf(i);
             s.push(last_accept);
-            while(i<test.length() && !dead.contains(q)){
+            while(i<test.length() && !dead.equals(q)){
                 int flag=0;
                 if(accept.contains(q))
                     s.clear();
@@ -58,7 +56,7 @@ public class Maximal_munch {
                 c=test.charAt(i);
 
                 int cols=table[0].length;
-                for (int k=0;k<cols;k++){
+                for (int k=1;k<cols;k++){
                     if(c==' ')
                     {  if(table[0][k].equals("ws")){
                         for (int rows=0;rows<table.length;rows++){
@@ -81,7 +79,7 @@ public class Maximal_munch {
 
                 }
                 if(c=='\n')  {
-                    q=dead.get(0);
+                    q=dead;
                     flag=1;
                     i++;}
                 if(flag==0){
@@ -147,13 +145,23 @@ public class Maximal_munch {
 
     }
 
-    public static void readAcceptStates(){
+    /* public static void readAcceptStates(){
 
         int rows=table.length;
-        for(int r=1;r<rows;r++){
-            if(table[r][0].charAt(0)=='a'){
-                accept.add(table[r][0].substring(1));
-                table[r][0]=table[r][0].substring(1);  }
+         for(int r=1;r<rows;r++){
+             if(table[r][0].charAt(0)=='a'){
+              accept.add(table[r][0].substring(1));
+             table[r][0]=table[r][0].substring(1);  }
+                    }
+
+
+     }*/
+    public static void readAcceptStates(String lines){
+
+        String[] a=lines.split(" ");
+        for(int r=0;r<a.length;r++){
+            accept.add(a[r]);
+
         }
 
 
@@ -164,7 +172,7 @@ public class Maximal_munch {
         int rows=table.length;
         for(int r=1;r<rows;r++){
             if(table[r][0].charAt(0)=='x'){
-                dead.add(table[r][0].substring(1));
+                // dead.add(table[r][0].substring(1));
                 table[r][0]=table[r][0].substring(1);  }
         }
 
@@ -186,14 +194,16 @@ public class Maximal_munch {
         Scanner input = new Scanner (new File("table.txt"));
         String text = new Scanner(new File("table.txt")).useDelimiter("\\A").next();
         String[] lines = text.split("\\r?\\n");
-        String[] s=lines[0].split(" ");
-        table=new String[lines.length][s.length];
+        String[] s=lines[1].split(" ");
+        table=new String[lines.length-1][s.length];
+        readAcceptStates(lines[0]);
 
+        input.nextLine();
 
         while (input.hasNext()){
-            for (int r=0;r<lines.length;r++){
-                s=lines[r].split(" ");
+            for (int r=0;r<lines.length-1;r++){
                 for (int j=0;j<s.length;j++){
+
 
                     table[r][j]= input.next();
                 }
@@ -203,9 +213,9 @@ public class Maximal_munch {
         initToken();
         test = new Scanner(new File("test.txt")).useDelimiter("\\A").next();
         test = test.replace("\n", " ").replace("\r", " ");
-        readAcceptStates();
-        readDeadStates();
-        readStartState();
+// readAcceptStates();
+        //readDeadStates();
+        //readStartState();
         String token= maximalMunch();
 
 
