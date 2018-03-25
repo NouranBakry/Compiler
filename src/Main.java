@@ -1,11 +1,12 @@
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.io.*;
 
 
 
 public class Main {
-
+    public static ArrayList <Integer>accept_states;
     public static void main(String[] args) throws IOException {
         NFA last = new NFA();
         //BufferedReader reader=null;
@@ -35,6 +36,7 @@ public class Main {
 
         DFA dfa = new DFA(last);
         Subset_Constructor s = new Subset_Constructor(last);
+        accept_states = s.accepting_states;
         DFA dfa_output = s.generate_DFA();
         dfa_output.display_DFA();
 
