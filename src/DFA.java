@@ -32,7 +32,8 @@ public class DFA {
             for(int i : Main.accept_states){
                 writer.write(i+" ");
             }
-            writer.write("\n" + "s ");
+            writer.append(System.lineSeparator());
+            writer.write("s ");
             ArrayList<String> inputs = new ArrayList<>();
             for (DFA_State d : states) {
                 for (String s : d.symbol) {
@@ -42,7 +43,7 @@ public class DFA {
                     }
                 }
             }
-            writer.write("\n");
+            writer.append(System.lineSeparator());
             System.out.println(inputs);
             for (DFA_State d : states) {
                 System.out.println(d.id + " " + d.stateTo);
@@ -50,7 +51,7 @@ public class DFA {
                 for(int i: d.stateTo){
                     writer.write(i+"  ");
                 }
-                writer.write("\n");
+                writer.append(System.lineSeparator());
             }
             writer.close();
         }
