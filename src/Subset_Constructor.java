@@ -11,11 +11,6 @@ public class Subset_Constructor {
     public Subset_Constructor(NFA nfa){
         this.nfa = nfa;
     }
-//    public static void print_list(ArrayList<trans>t){
-//        for (trans a : t) {
-//            System.out.println("(" + a.stateFrom + ", " + a.symp + ", " + a.stateTo + ")");
-//        }
-//    }
 
     public static ArrayList<Integer> epsilon_closure (ArrayList<trans>e){
         trans t; //stack pop in here
@@ -140,13 +135,20 @@ public class Subset_Constructor {
                 input.put(t.stateFrom,t.symp.toString());
             }
         }
+        DFA dfa = new DFA();
+        DFA_State dead_state = new DFA_State(0);
+        for(String s: input.values()){
+            dead_state.symbol.add(s);
+            dead_state.stateTo.add(0);
+        }
+        dfa.add_new_state(dead_state);
         int state_id = 1;
         ArrayList<trans>initial = new ArrayList<>(get_initial_transitions(nfa.transitions));
         //return epsilon closure transitions of initial state.
         ArrayList<Integer> Result = new ArrayList<>(epsilon_closure(initial)) ;
         DFA_State dfa_start_state;
 
-        DFA dfa = new DFA();
+
         if(Result.size()==0){
             for(trans f: nfa.transitions){
                 if(f.stateFrom==0){
