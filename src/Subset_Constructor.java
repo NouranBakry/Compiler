@@ -117,8 +117,8 @@ public class Subset_Constructor {
 
         nfa_accepting_states = accepting;
         System.out.println("final state:"+ nfa.finalState);
-        //System.out.println("NFA Accepting States");
-        //System.out.println(nfa_accepting_states);
+        System.out.println("NFA Accepting States");
+        System.out.println(nfa_accepting_states);
 
     }
     public void set_accept_states(DFA dfa){
@@ -170,11 +170,13 @@ public class Subset_Constructor {
             for(String s: input.values()) {
                 int found =0;
                 ArrayList<Integer> to_remove_epsilon = move(current.nfa_states, s);
+                //System.out.println("move output: "+to_remove_epsilon);
                 if (to_remove_epsilon.size() == 0) {
                     current.stateTo.add(0); // dead state
                     current.symbol.add(s);
+                    found=1;
                     //anything going to dead state will go to index 0.
-                   // dfa.display_DFA();
+
 
                 }
                 ArrayList<trans> to_epsilon = new ArrayList<>();
@@ -186,6 +188,13 @@ public class Subset_Constructor {
                     }
                 }
                 ArrayList<Integer> merged = epsilon_closure(to_epsilon);
+                //System.out.println("epsilon closure output: "+ merged);
+                for(int i: to_remove_epsilon){
+                    if(!merged.contains(i)){
+                        merged.add(i);
+                    }
+                }
+                //System.out.println("epsilon closure output: "+ merged);
                 if (merged.size() == 0) {
                     merged.addAll(to_remove_epsilon);
                 }
@@ -208,45 +217,60 @@ public class Subset_Constructor {
                 }
             }
         }
-        for(DFA_State d: dfa.states){
-            if(d.stateTo.size()!=input.size()||d.symbol.size()!=input.size()){
+        for(DFA_State d: dfa.states) {
+
+            if (d.stateTo.size() != input.size() || d.symbol.size() != input.size()) {
                 state_id = d.id;
                 d.stateTo.clear();
                 d.symbol.clear();
-                for(String a: input.values()){
+                for (String a : input.values()) {
+                    int dead = 0;
                     ArrayList<Integer> to_remove_epsilon = move(d.nfa_states, a);
-                    ArrayList<trans> to_epsilon = new ArrayList<>();
-                    for (trans t : nfa.transitions) {
-                        for (int c : to_remove_epsilon) {
-                            if (t.stateFrom == c && !to_epsilon.contains(t)) {
-                                to_epsilon.add(t);
+                    if (to_remove_epsilon.size() == 0) {
+                        d.stateTo.add(0); // dead state
+                        d.symbol.add(a);
+                        dead = 1;
+                        //anything going to dead state will go to index 0.
+                        // dfa.display_DFA();
+
+                    }
+                    if (dead == 0) {
+                        ArrayList<trans> to_epsilon = new ArrayList<>();
+                        for (trans t : nfa.transitions) {
+                            for (int c : to_remove_epsilon) {
+                                if (t.stateFrom == c && !to_epsilon.contains(t)) {
+                                    to_epsilon.add(t);
+                                }
                             }
                         }
-                    }
 
-                    ArrayList<Integer> merged = epsilon_closure(to_epsilon);
-                    if (merged.size() == 0) {
-                        merged.addAll(to_remove_epsilon);
-                    }
-
-                    for (int i = 0; i < dfa.states.size(); i++) {
-                        DFA_State pointer = dfa.states.get(i);
-                        if(pointer==d&&d.nfa_states.containsAll(merged)){
-                            d.stateTo.add(state_id);
-                            d.symbol.add(a);
-                            break;
+                        ArrayList<Integer> merged = epsilon_closure(to_epsilon);
+                        for (int i : to_remove_epsilon) {
+                            if (!merged.contains(i)) {
+                                merged.add(i);
+                            }
                         }
-                        else if (pointer.nfa_states.containsAll(merged)) {
-                            d.stateTo.add(pointer.id);
-                            d.symbol.add(a);
-                            dfa.display_DFA();
-                            break;
+                        if (merged.size() == 0) {
+                            merged.addAll(to_remove_epsilon);
+                        }
+
+                        for (int i = 0; i < dfa.states.size(); i++) {
+                            DFA_State pointer = dfa.states.get(i);
+                            if (pointer == d && d.nfa_states.containsAll(merged)) {
+                                d.stateTo.add(state_id);
+                                d.symbol.add(a);
+                                break;
+                            } else if (pointer.nfa_states.containsAll(merged)) {
+                                d.stateTo.add(pointer.id);
+                                d.symbol.add(a);
+                                //dfa.display_DFA();
+                                break;
+                            }
                         }
                     }
                 }
             }
         }
-
         is_accepting();
         if(dfa!=null) {
             set_accept_states(dfa);

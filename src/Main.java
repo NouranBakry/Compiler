@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         NFA last = new NFA();
         //BufferedReader reader=null;
-        String fileName = "input.txt";
+        String fileName = "input2.txt";
         File file = new File(fileName);
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));

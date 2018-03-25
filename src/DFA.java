@@ -19,7 +19,7 @@ public class DFA {
 
     public void display_DFA() {
         System.out.println("DFA:");
-        System.out.println("Dead State: 0" );
+        //System.out.println("Dead State: 0" );
         for (DFA_State t : states) {
             System.out.println("( state_id: " + t.id + ", nfa_states:  " + t.nfa_states + ", state_to:  " + t.stateTo +", symbol:  "+ t.symbol + ")");
         }
