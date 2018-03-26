@@ -38,6 +38,7 @@ public class Main {
         //DFA_Reducer reducer = new DFA_Reducer(dfa_output);
         //reducer.BFS();
         //reducer.partition();
+        Maximal_munch.toknize();
 
 
     }

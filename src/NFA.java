@@ -44,8 +44,7 @@ public class NFA {
 
     public void display() {
         for (trans t : transitions) {
-            System.out.println("(" + t.stateFrom + ", " + t.symp +
-                    ", " + t.stateTo + ")");
+            System.out.println("(" + t.stateFrom + ", " + t.symp + ", " + t.stateTo + ")");
         }
 
     }

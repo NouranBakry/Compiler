@@ -121,7 +121,7 @@ public class Subset_Constructor {
             }
 
             else if(t.stateTo==nfa.finalState && !accepting.contains(nfa.finalState)){
-                //accepting.add(t.stateFrom);
+
                 accepting_stack.push(t);
             }
 
@@ -222,12 +222,11 @@ public class Subset_Constructor {
             for(String s: input.values()) {
                 int found =0;
                 ArrayList<Integer> to_remove_epsilon = move(current.nfa_states, s);
-                //System.out.println("move output: "+to_remove_epsilon);
+                // dead state
                 if (to_remove_epsilon.size() == 0) {
-                    current.stateTo.add(0); // dead state
+                    current.stateTo.add(0);
                     current.symbol.add(s);
                     found=1;
-                    //anything going to dead state will go to index 0.
 
 
                 }
@@ -241,13 +240,13 @@ public class Subset_Constructor {
                     }
                 }
                 ArrayList<Integer> merged = epsilon_closure(to_epsilon);
-                //System.out.println("epsilon closure output: "+ merged);
+
                 for(int i: to_remove_epsilon){
                     if(!merged.contains(i)){
                         merged.add(i);
                     }
                 }
-                //System.out.println("epsilon closure output: "+ merged);
+
                 if (merged.size() == 0) {
                     merged.addAll(to_remove_epsilon);
                 }
@@ -256,7 +255,6 @@ public class Subset_Constructor {
                     DFA_State pointer = dfa.states.get(i);
                     if (pointer.nfa_states.containsAll(merged)) {
                         found = 1;
-                        //dfa.display_DFA();
                         break;
                     }
                 }
@@ -266,7 +264,7 @@ public class Subset_Constructor {
                         new_state = new DFA_State(state_id, merged);
                         stack.push(new_state);
                         dfa.add_new_state(new_state);
-                        //dfa.display_DFA();
+
                 }
             }
         }
@@ -282,12 +280,12 @@ public class Subset_Constructor {
                     int dead = 0;
                     ArrayList<Integer> to_remove_epsilon = move(d.nfa_states, a);
 
+                    // dead state
                     if (to_remove_epsilon.size() == 0) {
-                        d.stateTo.add(0); // dead state
+                        d.stateTo.add(0);
                         d.symbol.add(a);
                         dead = 1;
-                        //anything going to dead state will go to index 0.
-                        // dfa.display_DFA();
+
 
                     }
 
@@ -322,7 +320,7 @@ public class Subset_Constructor {
                             } else if (pointer.nfa_states.containsAll(merged)) {
                                 d.stateTo.add(pointer.id);
                                 d.symbol.add(a);
-                                //dfa.display_DFA();
+
                                 break;
                             }
                         }

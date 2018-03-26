@@ -154,7 +154,7 @@ public class Thompson {
     public static boolean validateRegEx(String regEx) {
         //boolean valid = false;
         if (regEx.isEmpty()) {
-            System.out.print("your regular expression is empty ya rania bla4 8abawa!!!");
+            System.out.print("No regular expression entered!");
             return false;
 
         }
@@ -173,7 +173,7 @@ public class Thompson {
         for (char c : regEx.toCharArray()) {
 
             if (!validateChar(c)) {
-                System.out.print("aktby sa7 ya bta3t 100% ya rania bla4 8abawa!!!");
+                System.out.print("invalid regular expression!");
                 return false;
 
             }
@@ -213,7 +213,7 @@ public class Thompson {
             }
 
 
-            // if(usedoperator(c)){
+
 
             if (c == '\\' && i + 1 < regex.length() && (isOperator(regex.charAt(i + 1))|| usedoperator(c)))
                 continue;
@@ -241,23 +241,21 @@ public class Thompson {
             }
 
 
-            //}
+
             else if (isOperand(c) && !sBrackets && i + 1 < regex.length() && regex.charAt(i + 1) == '-') {
-                // if(){
-                //   if(){
+
 
                 sBrackets = true;
                 operators.push(c);
                 sBcount++;
-                // }
-                //}
 
 
-                //concatFlag = true;
+
+
 
             } else if (c == '-') {
 
-                //concatFlag = false;
+
                 operators.push(c);
 
             } else if (isOperand(c) && i - 1 >= 0 && regex.charAt(i - 1) == '-') {
@@ -318,7 +316,7 @@ public class Thompson {
                     concatFlag = false;
                     if (count == 0) {
 
-                        System.out.println("ERROR : more ending paranthesis than beginning paranthesis");
+                        System.out.println("ERROR : invalid number of parentheses");
                         System.exit(2);
 
                     } else {
@@ -401,7 +399,7 @@ public class Thompson {
 
             if (operands.isEmpty()) {
 
-                System.out.println("imbalance operands and operators ya rania matetzakee4 3lna 3eeb !!");
+                System.out.println("Error: imbalanced operands and operators!");
                 System.exit(3);
             }
 
@@ -459,7 +457,7 @@ public class Thompson {
 
                 operands.push(union(operands.pop(), operands.pop()));
             }
-            //System.out.println("LAST NEEDED : ");
+
             last = operands.pop();
 
 
