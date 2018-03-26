@@ -63,7 +63,7 @@ public class DFA_Reducer {
                 if (!visited[neighbour]) {
                     visitedQueue.add(neighbour);
                 }
-                //  System.out.println("neighbour " + neighbour);
+                //System.out.println("neighbour " + neighbour);
             }
 
             visited[visit] = true;
@@ -97,7 +97,6 @@ public class DFA_Reducer {
         P= new ArrayList<>(); //{{0,3},{2}}
         for(int i=0;i<transitions.length;i++){
             ArrayList<HashSet<Point>> inner= new ArrayList<>();
-
             for(int j=0;j<transitions.length;j++){
                 Arrays.fill(twoD[i],false);
                 inner.add(new HashSet<>());
@@ -134,7 +133,7 @@ public class DFA_Reducer {
 
                     if(twoD[m][n]||twoD[n][m]){ //same transitions
                         sameTrans(i,j);
-                        // System.out.println("test NOT same states "+i+j);
+                        System.out.println("test NOT same states "+i+j);
                         together=true;
                         break;
                     }
@@ -155,7 +154,7 @@ public class DFA_Reducer {
 
                 }
             }
-            // System.out.print("partition"+transitions[i]);
+            System.out.println("partition"+transitions[i]);
         }
         mergeStates();
 
@@ -246,7 +245,7 @@ public class DFA_Reducer {
 
             }
 
-            //  System.out.print("renumber"+group);
+              System.out.print("renumber"+group);
 
             for(Integer state: new HashSet<Integer>(newaccepedStates)){
                 if(group.contains(state)){

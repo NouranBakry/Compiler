@@ -1,1 +1,1 @@
-id:a-z|A-Z*
+id:abb(a|b)*

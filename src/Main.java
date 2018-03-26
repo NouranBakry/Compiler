@@ -1,5 +1,3 @@
-import java.util.HashMap;
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.*;
 
@@ -9,8 +7,7 @@ public class Main {
     public static ArrayList <Integer>accept_states;
     public static void main(String[] args) throws IOException {
         NFA last = new NFA();
-        //BufferedReader reader=null;
-        String fileName = "nouran.txt";
+        String fileName = "input.txt";
         File file = new File(fileName);
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -33,12 +30,14 @@ public class Main {
         }
         System.out.println("NFA :");
         last.display();
-
         DFA dfa = new DFA(last);
         Subset_Constructor s = new Subset_Constructor(last);
         accept_states = s.accepting_states;
         DFA dfa_output = s.generate_DFA();
         dfa_output.display_DFA();
+        //DFA_Reducer reducer = new DFA_Reducer(dfa_output);
+        //reducer.BFS();
+        //reducer.partition();
 
 
     }
