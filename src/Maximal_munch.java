@@ -58,10 +58,10 @@ public class Maximal_munch {
     public static String maximalMunch(){
         i=0;
         while(true){
-            String q=start;
-            String d="";
+            String q = start;
+            String d = "";
 
-            last_accept[0][0]="error";
+            last_accept[0][0] = "error";
             last_accept[0][1]=String.valueOf(i);
             s.push(last_accept);
             while(i<test.length() && !dead.equals(q)){
@@ -94,8 +94,8 @@ public class Maximal_munch {
                 }
 
                 if(flag==0){
-                    System.out.println("Unidentified character "+c);
-                    return "Unidentified character "+c;
+                    System.out.println("Unidentified character "+ c);
+                    return "Unidentified character "+ c;
                 }
 
 
@@ -106,7 +106,6 @@ public class Maximal_munch {
                 for (int t = token_beginning; t<i; t++){
                     d=d+test.charAt(t);
                 }getToken(d);
-                //System.out.println(d);
 
                 return "Success";
             }
@@ -116,8 +115,9 @@ public class Maximal_munch {
                 q=last_accept[0][0];
                 i=Integer.parseInt(last_accept[0][1]);
                 if(last_accept[0][0]=="error"){
-                    System.out.println("Failed: unable to tokanize");
-                    return "Failed: unable to tokanize";}
+                    System.out.println("Failed: unable to tokenize");
+                    return "Failed: unable to tokenize";
+                }
 
                 for (int t = token_beginning; t<i; t++){
                     d=d+test.charAt(t);
@@ -130,7 +130,7 @@ public class Maximal_munch {
                     getToken(d);
                     return "Success";}
             }
-            // System.out.println(d);
+
             getToken(d);
         }
     }

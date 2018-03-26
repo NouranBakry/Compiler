@@ -2,20 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a110070f-d09f-4d57-89bf-b90c9729682a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Nouran.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Nouran.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/input3.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/input4.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test.txt" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/DFA_output.txt" afterPath="$PROJECT_DIR$/DFA_output.txt" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lexical/DFA.class" afterPath="$PROJECT_DIR$/out/production/Lexical/DFA.class" />
       <change beforePath="$PROJECT_DIR$/out/production/Lexical/Main.class" afterPath="$PROJECT_DIR$/out/production/Lexical/Main.class" />
       <change beforePath="$PROJECT_DIR$/out/production/Lexical/Maximal_munch.class" afterPath="$PROJECT_DIR$/out/production/Lexical/Maximal_munch.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Lexical/NFA.class" afterPath="$PROJECT_DIR$/out/production/Lexical/NFA.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Lexical/Subset_Constructor.class" afterPath="$PROJECT_DIR$/out/production/Lexical/Subset_Constructor.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Lexical/Thompson.class" afterPath="$PROJECT_DIR$/out/production/Lexical/Thompson.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Lexical/separator.class" afterPath="$PROJECT_DIR$/out/production/Lexical/separator.class" />
+      <change beforePath="$PROJECT_DIR$/src/DFA.java" afterPath="$PROJECT_DIR$/src/DFA.java" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
       <change beforePath="$PROJECT_DIR$/src/Maximal_munch.java" afterPath="$PROJECT_DIR$/src/Maximal_munch.java" />
-      <change beforePath="$PROJECT_DIR$/src/NFA.java" afterPath="$PROJECT_DIR$/src/NFA.java" />
-      <change beforePath="$PROJECT_DIR$/src/Subset_Constructor.java" afterPath="$PROJECT_DIR$/src/Subset_Constructor.java" />
-      <change beforePath="$PROJECT_DIR$/src/Thompson.java" afterPath="$PROJECT_DIR$/src/Thompson.java" />
-      <change beforePath="$PROJECT_DIR$/src/separator.java" afterPath="$PROJECT_DIR$/src/separator.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,8 +30,8 @@
       <file leaf-file-name="DFA.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DFA.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+            <state relative-caret-position="255">
+              <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#186#187#0" expanded="true" />
@@ -80,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Maximal_munch.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Maximal_munch.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Maximal_munch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="197" column="20" lean-forward="true" selection-start-line="197" selection-start-column="20" selection-end-line="197" selection-end-column="20" />
+            <state relative-caret-position="-1288">
+              <caret line="63" column="30" lean-forward="false" selection-start-line="63" selection-start-column="30" selection-end-line="63" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#524#532#0" expanded="true" />
@@ -111,11 +108,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="40" column="32" lean-forward="false" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
+            <state relative-caret-position="153">
+              <caret line="9" column="32" lean-forward="false" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -155,13 +152,13 @@
         <option value="$PROJECT_DIR$/src/decider.java" />
         <option value="$PROJECT_DIR$/src/DFA_State.java" />
         <option value="$PROJECT_DIR$/src/DFA_Reducer.java" />
-        <option value="$PROJECT_DIR$/src/DFA.java" />
         <option value="$PROJECT_DIR$/src/Thompson.java" />
         <option value="$PROJECT_DIR$/src/separator.java" />
         <option value="$PROJECT_DIR$/src/NFA.java" />
         <option value="$PROJECT_DIR$/src/Subset_Constructor.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/Maximal_munch.java" />
+        <option value="$PROJECT_DIR$/src/DFA.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
   </component>
@@ -762,34 +759,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DFA.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#186#187#0" expanded="true" />
-            <element signature="e#233#234#0" expanded="true" />
-            <element signature="e#378#379#0" expanded="true" />
-            <element signature="e#412#413#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/input3.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Thompson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="459" column="0" lean-forward="false" selection-start-line="459" selection-start-column="0" selection-end-line="459" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -829,10 +802,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/DFA.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#186#187#0" expanded="true" />
+            <element signature="e#233#234#0" expanded="true" />
+            <element signature="e#378#379#0" expanded="true" />
+            <element signature="e#412#413#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="32" lean-forward="false" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Thompson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="459" column="0" lean-forward="false" selection-start-line="459" selection-start-column="0" selection-end-line="459" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Maximal_munch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="197" column="20" lean-forward="true" selection-start-line="197" selection-start-column="20" selection-end-line="197" selection-end-column="20" />
+        <state relative-caret-position="-1288">
+          <caret line="63" column="30" lean-forward="false" selection-start-line="63" selection-start-column="30" selection-end-line="63" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#524#532#0" expanded="true" />
@@ -842,16 +849,6 @@
             <element signature="e#810#818#0" expanded="true" />
             <element signature="e#879#887#0" expanded="true" />
             <element signature="e#946#954#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="40" column="32" lean-forward="false" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

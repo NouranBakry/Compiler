@@ -1,0 +1,1 @@
+nouran:(a|b)*aba(a|b)*

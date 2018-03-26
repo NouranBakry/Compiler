@@ -71,6 +71,7 @@ public class DFA {
             System.out.println("( state_id: " + t.id + ", nfa_states:  " + t.nfa_states + ", state_to:  " + t.stateTo +", symbol:  "+ t.symbol + ")");
         }
 
+        System.out.println("\n");
     }
 
 }
