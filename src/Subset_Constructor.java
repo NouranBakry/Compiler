@@ -51,6 +51,15 @@ public class Subset_Constructor {
         return start_state;
 
     }
+    public static String getStringRepresentation(ArrayList<Character> list)
+    {
+        StringBuilder builder = new StringBuilder(list.size());
+        for(Character ch: list)
+        {
+            builder.append(ch);
+        }
+        return builder.toString();
+    }
     public static ArrayList<Integer> move (ArrayList<Integer> e,String c){
         trans t;
         ArrayList<Integer> states = new ArrayList<>();
@@ -59,8 +68,9 @@ public class Subset_Constructor {
         }
         while(!stack.isEmpty()) {
             t = stack.pop();
+            String temp = getStringRepresentation(t.symp);
             int next = t.stateTo;
-            if (t.symp.toString().equals(c) && !states.contains(next)) {
+            if (temp.equals(c) && !states.contains(next)) {
                 if(e.contains(t.stateFrom)){
                     states.add(next);}
                 for (trans p : nfa.transitions) {
@@ -128,11 +138,14 @@ public class Subset_Constructor {
         System.out.println(accepting_states);
     }
     public DFA generate_DFA(){
-        HashMap <Integer,String> input = new HashMap<>();
+        HashMap <Integer, String> input = new HashMap<>();
+        int count = 0;
         for(trans t: nfa.transitions){
-            if(!t.symp.contains('~')&&!input.containsValue(t.symp.toString())){
-                //System.out.println("input symbol insertion: "+ t.symp);
-                input.put(t.stateFrom,t.symp.toString());
+            for(char c: t.symp){
+                if(c!='~'&&!input.containsValue(Character.toString(c))){
+                    count++;
+                    input.put(count,Character.toString(c));
+                }
             }
         }
         DFA dfa = new DFA();
@@ -147,7 +160,6 @@ public class Subset_Constructor {
         //return epsilon closure transitions of initial state.
         ArrayList<Integer> Result = new ArrayList<>(epsilon_closure(initial)) ;
         DFA_State dfa_start_state;
-
 
         if(Result.size()==0){
             for(trans f: nfa.transitions){

@@ -33,13 +33,14 @@ public class DFA {
                 writer.write(i+" ");
             }
             writer.append(System.lineSeparator());
-            writer.write("s ");
+            writer.write("s  ");
             ArrayList<String> inputs = new ArrayList<>();
             for (DFA_State d : states) {
                 for (String s : d.symbol) {
                     if (!inputs.contains(s)) {
                         inputs.add(s);
-                        writer.write(s.replace('[',' ').replace(']',' '));
+                        //writer.write(s.replace('[',' ').replace(']',' '));
+                        writer.write(s+"  ");
                     }
                 }
             }

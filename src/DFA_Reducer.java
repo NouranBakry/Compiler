@@ -1,119 +1,106 @@
+//Construct a partition
 import java.awt.*;
 import java.util.*;
 
 public class DFA_Reducer {
 
     public DFA dfa;
-    public Subset_Constructor s;
     public ArrayList<DFA_State> states;
-    public ArrayList<Integer> accepting_states;
+    public ArrayList<String>symbols=new ArrayList<>();
+    // public ArrayList<Integer> accepting_states;
+    public ArrayList<Integer> accepting_states = Main.accept_states;
     public boolean[][] twoD;
     public ArrayList<ArrayList<HashSet<Point>>> P;
     public HashSet<Integer> acceptStates = new HashSet<>();
-    public ArrayList<Integer>[] transitions;
+    // public ArrayList<Integer>[] transitions;
+    // public int id;
 
     public DFA_Reducer(DFA dfa){
         this.dfa = dfa;
         this.states = dfa.states;
-        this.accepting_states = s.accepting_states;
+        //  this.id=id;
+
     }
-    public void set_transitions(){
-        int i =0;
-        for(DFA_State d: states){
-            transitions[i] = d.stateTo;
-            i++;
+
+    public void set_Symbols() {
+        for (DFA_State d : states) {
+            for (String k : d.symbol) {
+                symbols.add(k);
+            }
         }
     }
+
     public void set_hashset(){
-        for(int d:accepting_states){
-            acceptStates.add(d);
-        }
+        acceptStates.addAll(accepting_states);
+        System.out.print("accept states Nouran "+accepting_states);
     }
+
     public void BFS() { //remove unreachable states (states that have equal transitions)
-        System.out.println("Hello");
-//        Queue<DFA_State> visitedQueue=new LinkedList<>();
-//        for(DFA_State d: states){
-//            visitedQueue.add(d);
-//        }
-//        ArrayList<DFA_State> visitedStates = new ArrayList<>();
-//        boolean[] visited=new boolean[states.size()];
-//        //Queue<Integer> visitedQueue=new LinkedList<Integer>();
-//        //visitedQueue.add(0);
-//        while (!visitedQueue.isEmpty()) {
-//            //int visit = visitedQueue.remove();
-//            DFA_State s = visitedQueue.remove();
-//            int visit = s.id;
-//            visited[s.id]=true;
-//            visitedStates.add(s);
-//            //DFAState visitedStates = states[visit];
-//            for(DFA_State d: visitedStates){
-//                for(int i: d.stateTo){
-//                    if(!visited[i]){
-//                        for(DFA_State f: states) {
-//                            if(f.id==i){
-//                                visitedQueue.add(f);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-////            for (int neighbour : visitedStates.transitions) {
-////                if (!visited[neighbour]) {
-////                    visitedQueue.add(neighbour);
-////                }
-////            }
-//
-//            visited[visit] = true;
-//        }
-//
-//        for(int i=0;i<visited.length;i++){
-//            if(!visited[i])
-//            {
-//                states.remove(i);
-//            }
-//        }
-        ArrayList<Integer>[] transitions = null;
-        set_transitions();
+        System.out.println("Hello BFS\n");
+        // set_Symbols();
+        int num=states.size();
+        ArrayList<Integer>[]transitions=new ArrayList[num];
+        int k = 0;
+        for (DFA_State d : states) {
+            transitions[k] = d.stateTo;
+            k++;
+
+        }
+        // transitions[0]=new ArrayList<>(0);
+        // transitions[0].add(0);
+        //transitions[0].add(0);
         boolean[] visited=new boolean[transitions.length];
-        Queue<Integer> visitedQueue=new LinkedList<Integer>();
-        visitedQueue.add(0);
-        visited[0]=true;
+        Queue<Integer> visitedQueue= new LinkedList<>();
+        visitedQueue.add(1);
+        visited[1]=true;
         while (!visitedQueue.isEmpty()) {
             int visit = visitedQueue.remove();
             ArrayList<Integer> visitedStates = transitions[visit];
             for (int neighbour : visitedStates) {
+                if(neighbour==0){         //dead state
+                    break;
+                }
                 if (!visited[neighbour]) {
                     visitedQueue.add(neighbour);
                 }
+                //  System.out.println("neighbour " + neighbour);
             }
 
             visited[visit] = true;
+
         }
 
         for(int i=0;i<visited.length;i++){
             if(!visited[i])
             {
                 transitions[i]=null;
-            }
-        }
+                System.out.println("un visited states " + i);
 
+            }
+            System.out.println("transitions of BFS "+transitions[i]);
+        }
     }
 
     public void partition() {  // {{0},{3},{1,2}}
+        System.out.print("Hello partition\n");
         set_hashset();
-        ArrayList<Integer>[] transitions = null;
-        set_transitions();
-        //boolean[][] twoD;
-       // ArrayList<ArrayList<HashSet<Point>>> P;
+        int num=states.size();
+        ArrayList<Integer>[]transitions=new ArrayList[num];
+        int k = 0;
+        for (DFA_State d : states) {
+            transitions[k] = d.stateTo;
+            k++;
+        }
+        // transitions[0]=new ArrayList<>(0);
 
         twoD=new boolean[transitions.length][transitions.length];
-        P=new ArrayList<ArrayList<HashSet<Point>>>(); //{{0,3},{2}}
+        P= new ArrayList<>(); //{{0,3},{2}}
         for(int i=0;i<transitions.length;i++){
-            ArrayList<HashSet<Point>> inner=new ArrayList<HashSet<Point>>();
+            ArrayList<HashSet<Point>> inner= new ArrayList<>();
 
             for(int j=0;j<transitions.length;j++){
                 Arrays.fill(twoD[i],false);
-                inner.add(new HashSet<Point>());
+                inner.add(new HashSet<>());
             }
             P.add(inner);
         }
@@ -124,8 +111,9 @@ public class DFA_Reducer {
                     twoD[i][j]=true;
                 }
             }
-        }
 
+
+        }
         for(int i=0;i<transitions.length;i++){
             for(int j=i+1;j<transitions.length;j++){
                 if(twoD[i][j]){
@@ -145,51 +133,57 @@ public class DFA_Reducer {
                     int n=sj.get(w);
 
                     if(twoD[m][n]||twoD[n][m]){ //same transitions
-                        //sameTrans(i,j);
+                        sameTrans(i,j);
+                        // System.out.println("test NOT same states "+i+j);
                         together=true;
                         break;
                     }
                 }
 
                 if(!together){
-                    for(int w=0;w<si.size();i++){ //if we have {{0,3},{2}} it will be {{0},{3},{2}}
+                    for(int w=1;w<si.size();w++){ //if we have {{0,3},{2}} it will be {{0},{3},{2}}
                         int m=si.get(w);
                         int n=sj.get(w);
-
                         if(m<n && !(i==m && j==n)){
                             P.get(m).get(n).add(new Point(i,j));
                         }
                         else if(m>n && !(i==n && j==m)){
                             P.get(n).get(m).add(new Point(i,j));
+
                         }
                     }
+
                 }
-
-
             }
+            // System.out.print("partition"+transitions[i]);
         }
-
         mergeStates();
 
     }
-    private void mergeStates() { //merge states and sort it
+    private void mergeStates() { //merge states and sort it by smallest
+        System.out.print("\nHello merge States\n");
+        ArrayList<ArrayList<Integer>> newStates= new ArrayList<>();
+        HashSet<Integer> newaccepedStates= new HashSet<>();
+        HashMap<Integer,Integer> merged= new HashMap<>();
+        ArrayList<ArrayList<Integer>> MergeGroup= new ArrayList<>();
+
         set_hashset();
-        ArrayList<Integer>[] transitions = null;
-        set_transitions();
-
+        int num=states.size();
+        ArrayList<Integer>[]transitions=new ArrayList[num];
+        int k = 0;
+        for (DFA_State d : states) {
+            transitions[k] = d.stateTo;
+            k++;
+        }
+        //  transitions[0]=new ArrayList<>(0);
         twoD=new boolean[transitions.length][transitions.length];
-        P=new ArrayList<ArrayList<HashSet<Point>>>(); //{{0,3},{2}}
-
-        ArrayList<Integer> newStates= new ArrayList<Integer>();
-        HashSet<Integer> newaccepedStates=new HashSet<Integer>();
-        HashMap<Integer,Integer> merged=new HashMap<Integer, Integer>();
-        ArrayList<ArrayList<Integer>> MergeGroup=new ArrayList<ArrayList<Integer>>();
+        P= new ArrayList<>(); //{{0,3},{2}}
 
         for(int i=0;i<twoD.length;i++){
             if(merged.get(i)!=null || transitions[i]==null){
                 continue;
             }
-            //DFAState state=states[i];
+
             ArrayList<Integer> state =transitions[i];
             ArrayList<Integer> toMerge=new ArrayList<Integer>();
             for(int j=i+1;j<twoD.length;j++){
@@ -200,7 +194,7 @@ public class DFA_Reducer {
             }
 
             for(int j=0;j<state.size();j++){
-                int tran=state.get(j);
+                Integer tran=state.get(j);
                 if(merged.containsKey(tran)){
                     state.set(j,merged.get(tran));
                 }
@@ -211,38 +205,48 @@ public class DFA_Reducer {
             }
             toMerge.add(i);
             MergeGroup.add(toMerge);
-            for(int y: state){
-                newStates.add(y);
-            }
-            //newStates.add(state);
-
+            newStates.add(state);
         }
 
         renumberStates(MergeGroup,newaccepedStates);
 
-        //DFAState [] newGroupedStates=new DFAState[newStates.size()];
         ArrayList<Integer>[] newGroupedStates = new ArrayList [newStates.size()];
         newGroupedStates =newStates.toArray(newGroupedStates);
-        transitions=newGroupedStates;
+        transitions = newGroupedStates;
         acceptStates=newaccepedStates;
+
+        System.out.print("merge group"+MergeGroup);
+        System.out.println("New accepted states"+newaccepedStates);
 
     }
 
     private void renumberStates(ArrayList<ArrayList<Integer>> mergeGroup, HashSet<Integer> newaccepedStates) {
+        System.out.print("Hello renumber states\n");
+        int num=states.size()+1;
+        ArrayList<Integer>[]transitions=new ArrayList[num];
+        int k = 0;
+        for (DFA_State d : states) {
+            transitions[k] = d.stateTo;
+            k++;
+        }
+        // transitions[0]=new ArrayList<>(0);
         for(int i=0;i<mergeGroup.size();i++){
             ArrayList<Integer> group=mergeGroup.get(i);
-            for(ArrayList state:transitions){
+            for(ArrayList<Integer> state:transitions){
                 if(state==null){
                     continue;
                 }
                 for(int j=0;j<state.size();j++){
-                    //Integer val= state.get(j);
-                    int val = state.indexOf(j); //questionable
+                    Integer val=state.get(j);
                     if(group.contains(val)){
                         state.set(j,i);
                     }
                 }
+
+
             }
+
+            //  System.out.print("renumber"+group);
 
             for(Integer state: new HashSet<Integer>(newaccepedStates)){
                 if(group.contains(state)){
@@ -255,36 +259,109 @@ public class DFA_Reducer {
     }
 
     private void sameTrans(int i, int j) {
-        _sameTrans(new Point(i,j),new HashSet<Point>());
+        //System.out.print("hello NOT same trans\n");
+        _sameTrans(new Point(i,j), new HashSet<>());
     }
 
     private void _sameTrans(Point point,HashSet<Point>visited) { //if {1,,2} is same transition put them together in new point
-        if(visited.contains(point)){
+        if (visited.contains(point)) {
             return;
         }
-        int i=point.x;
-        int j=point.y;
-        twoD[i][j]=true;
+        int i = point.x;
+        int j = point.y;
+        twoD[i][j] = true;
         visited.add(point);
-        for(Point pair:P.get(i).get(j)){
-            _sameTrans(pair,visited);
+        for (Point pair : P.get(i).get(j)) {
+            _sameTrans(pair, visited);
         }
     }
+
+    public void display() {
+        System.out.println("\ntest print\n");
+        HashMap<ArrayList<DFA_State>, ArrayList<DFA_State>> test=new HashMap<>();
+        // ArrayList<Integer>=new ArrayList<>();
+
+
+        int num=states.size()+1;
+        ArrayList<Integer>[]transitions=new ArrayList[num];
+        int k = 1;
+        for (DFA_State d : states) {
+            transitions[k] = d.stateTo;
+            k++;
+        }
+        transitions[0]=new ArrayList<>(0);
+
+        set_Symbols();
+        System.out.print("s ");
+        for(String s: symbols){
+            System.out.print(s);
+        }
+        System.out.print("\n");
+        for(DFA_State f: dfa.states){
+            System.out.println(f.id);
+        }
+
+//        for(ArrayList<Integer>state:transitions) {
+//            for (int i = 0; i < state.size(); i++) {
+//                Integer val = state.get(i);
+//               // System.out.print(val);
+//               System.out.print(transitions[i]);
+//            }
+//        }
+
+        // test.put(dfa.states.id,states);
+
+        //  System.out.print(test);
+
+    }
+
+
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
         Formatter formatter = new Formatter(sb, Locale.US);
-        for(ArrayList state:transitions){
+
+        int num=states.size()+1;
+        ArrayList<Integer>[]transitions=new ArrayList[num];
+        int k = 1;
+        for (DFA_State d : states) {
+            transitions[k] = d.stateTo;
+            k++;
+        }
+        transitions[0]=new ArrayList<>(0);
+
+        //System.out.print("Accepted States\n");
+        ArrayList<Integer> acceptable = new ArrayList<>(acceptStates);
+        Collections.sort(acceptable);
+        formatter.format("%d ", acceptable.size());
+        for (int i = 0; i < acceptable.size(); i++) {
+            Integer val = acceptable.get(i);
+            if (i < acceptable.size() - 1) {
+                formatter.format("%d ", val);
+            } else {
+                formatter.format("%d\n", val);
+            }
+        }
+//
+//        set_Symbols();          btt7asb 3`alt ???????????
+//        System.out.print("s ");
+//        for(String s: symbols){
+//            System.out.print(s);
+//        }
+        System.out.print("\n");
+        for(DFA_State f: dfa.states){
+            System.out.println(f.id);
+        }
+
+        for(ArrayList<Integer> state:transitions){
             for(int i=0;i<state.size();i++){
-                //Integer val=state.get(i);
-                int val = state.indexOf(i);
-                if (i < state.size() - 1) {
+                Integer val=state.get(i);
+                if (i < state.size()-1) {
                     formatter.format("%d ", val);
                 }
                 else {
                     formatter.format("%d\n", val);
                 }
-                // System.out.println(val);
 
             }
         }
