@@ -368,7 +368,11 @@ public class Thompson {
 
                         }
 
+                    }
 
+                    operators.pop();
+                    if(i+1<regex.length()&&regex.charAt(i+1)=='('){
+                        operators.push('.');
                     }
 
                 } else if (c == '*') {

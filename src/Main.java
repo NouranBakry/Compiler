@@ -39,7 +39,7 @@ public class Main {
         //reducer.BFS();
         //reducer.partition();
         System.out.println("Maximal Munch: ");
-        Maximal_munch.toknize();
+        Maximal_munch.tokenize();
 
 
     }

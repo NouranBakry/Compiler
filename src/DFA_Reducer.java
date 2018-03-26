@@ -1,4 +1,4 @@
-//Construct a partition
+
 import java.awt.*;
 import java.util.*;
 
