@@ -7,7 +7,7 @@ public class Main {
     public static ArrayList <Integer>accept_states;
     public static void main(String[] args) throws IOException {
         NFA last = new NFA();
-        String fileName = "input.txt";
+        String fileName = "nouran.txt";
         File file = new File(fileName);
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));

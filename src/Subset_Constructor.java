@@ -89,7 +89,7 @@ public class Subset_Constructor {
             String temp = getStringRepresentation(t.symp);
             int next = t.stateTo;
 
-            if (temp.equals(c) && !states.contains(next)) {
+            if ((temp.equals(c) || temp.contains(c)) && !states.contains(next)) {
                 if(e.contains(t.stateFrom)){
                     states.add(next);
                 }
@@ -114,7 +114,7 @@ public class Subset_Constructor {
         int flag;
 
         for(trans t: states){
-            if(t.stateTo == nfa.finalState && t.symp.contains('~')&& t.stateFrom!=0){ //I don't consider 0 an accepting state?
+            if(t.stateTo == nfa.finalState && t.symp.contains('~')&& t.stateFrom!=0){
                 accepting.add(t.stateFrom);
                 accepting_stack.push(t);
 
@@ -147,9 +147,9 @@ public class Subset_Constructor {
         }
 
         nfa_accepting_states = accepting;
-        System.out.println("final state:"+ nfa.finalState);
-        System.out.println("NFA Accepting States");
-        System.out.println(nfa_accepting_states);
+        //System.out.println("final state:"+ nfa.finalState);
+        //System.out.println("NFA Accepting States");
+        //System.out.println(nfa_accepting_states);
 
     }
 
