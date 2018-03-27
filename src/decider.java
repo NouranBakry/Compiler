@@ -1,6 +1,8 @@
 import java.util.HashMap;
 
+
 public class decider {
+
     Thompson n = new Thompson();
     static HashMap<String,NFA> NFAused = new HashMap<>();
     static HashMap<String,NFA> NFAneeded = new HashMap<>();
@@ -12,6 +14,7 @@ public class decider {
     public decider(String[] seperated) {
         this.seperated = seperated;
     }
+
     public NFA decide(String separated []){
         NFA nfa_input = new NFA();
         if(separated[2] == "{"){
@@ -28,7 +31,9 @@ public class decider {
                         NFAused.put(separated[0].substring(0,separated[0].length()-1),input);
                         temp = "";
 
-                    }}
+                    }
+                }
+
                 else {
                     temp += x2;
                     start = true;

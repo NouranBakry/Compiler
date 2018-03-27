@@ -7,7 +7,7 @@ public class Main {
     public static ArrayList <Integer>accept_states;
     public static void main(String[] args) throws IOException {
         NFA last = new NFA();
-        String fileName = "input.txt";
+        String fileName = "rules.txt";
         File file = new File(fileName);
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -38,7 +38,7 @@ public class Main {
         DFA_Reducer reducer = new DFA_Reducer(dfa_output);
         reducer.BFS();
         reducer.partition();
-        System.out.println("Maximal Munch: ");
+        System.out.println("\nMaximal Munch: ");
         Maximal_munch.tokenize();
 
 

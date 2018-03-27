@@ -1,14 +1,13 @@
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
 
 
 public class DFA {
 
     public ArrayList <DFA_State> states;
     public NFA nfa;
+
 
     public DFA (){
         this.states = new ArrayList<>();
@@ -23,6 +22,7 @@ public class DFA {
         this.states.add(d);
     }
 
+    // Prints DFA transition table
     public void display_DFA() throws  IOException {
 
         try (FileWriter writer = new FileWriter("DFA_output.txt")) {
@@ -68,7 +68,8 @@ public class DFA {
         System.out.print("\n");
 
         for (DFA_State t : states) {
-            System.out.println("( state_id: " + t.id + ", nfa_states:  " + t.nfa_states + ", state_to:  " + t.stateTo +", symbol:  "+ t.symbol + ")");
+            System.out.println("( state_id: " + t.id + ", nfa_states:  " + t.nfa_states + ", state_to:  "
+                    + t.stateTo +", symbol:  "+ t.symbol + ")");
         }
 
         System.out.println("\n");

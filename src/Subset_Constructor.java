@@ -3,13 +3,14 @@ import java.util.HashMap;
 import java.util.Stack;
 
 
+/*Generates DFA from NFA according to Subset Construction Algorithm. */
+
 public class Subset_Constructor {
 
-
-    public static NFA nfa;
-    public static Stack <trans> stack = new Stack<>();
+    private static NFA nfa;
+    private static Stack <trans> stack = new Stack<>();
     public ArrayList <Integer> accepting_states = new ArrayList<>();
-    public ArrayList <Integer> nfa_accepting_states = new ArrayList<>();
+    private ArrayList <Integer> nfa_accepting_states = new ArrayList<>();
 
     public Subset_Constructor(NFA nfa){
 
@@ -17,10 +18,27 @@ public class Subset_Constructor {
     }
 
 
-    public static ArrayList<Integer> epsilon_closure (ArrayList<trans>e){
+
+    /* Returns initial transition from the start state. */
+    private static ArrayList<trans> get_initial_transitions(ArrayList<trans>state_transitions){
+        ArrayList<trans> start_state;
+        start_state= new ArrayList<>();
+
+        for(trans s: state_transitions){
+            if(s.stateFrom==0){
+                start_state.add(s);
+            }
+        }
+
+        return start_state;
+    }
+
+    /* Implementation of the algorithm */
+    private static ArrayList<Integer> epsilon_closure (ArrayList<trans>e){
         trans t;
         ArrayList <Integer> epsilon_states = new ArrayList<>();
 
+        // push all states into Stack.
         for(trans a: e){
             stack.push(a);
         }
@@ -28,7 +46,7 @@ public class Subset_Constructor {
         while(!stack.isEmpty()){
             t = stack.pop();
             int next = t.stateTo;
-
+            // Get all transitions labeled ϵ.
             if(t.symp.contains('~')&&!epsilon_states.contains(next)){
                 if(!epsilon_states.contains(t.stateFrom)) {
                     epsilon_states.add(t.stateFrom);
@@ -48,38 +66,11 @@ public class Subset_Constructor {
 
     }
 
-
-    public static ArrayList<trans> get_initial_transitions(ArrayList<trans>state_transitions){
-        ArrayList<trans> start_state;
-        start_state= new ArrayList<>();
-
-        for(trans s: state_transitions){
-            if(s.stateFrom==0){
-                start_state.add(s);
-            }
-        }
-
-        return start_state;
-    }
-
-
-    public static String getStringRepresentation(ArrayList<Character> list)
-    {
-        StringBuilder builder = new StringBuilder(list.size());
-
-        for(Character ch: list)
-        {
-            builder.append(ch);
-        }
-
-        return builder.toString();
-    }
-
-
-    public static ArrayList<Integer> move (ArrayList<Integer> e,String c){
+    private static ArrayList<Integer> move (ArrayList<Integer> e,String c){
         trans t;
         ArrayList<Integer> states = new ArrayList<>();
 
+        // push all states into stack.
         for(trans a: nfa.transitions){
             stack.push(a);
         }
@@ -88,7 +79,7 @@ public class Subset_Constructor {
             t = stack.pop();
             String temp = getStringRepresentation(t.symp);
             int next = t.stateTo;
-
+            // Returns all transitions from the set of transitions given with edge labelled by character c.
             if ((temp.equals(c) || temp.contains(c)) && !states.contains(next)) {
                 if(e.contains(t.stateFrom)){
                     states.add(next);
@@ -105,13 +96,25 @@ public class Subset_Constructor {
         return states;
     }
 
+    private static String getStringRepresentation(ArrayList<Character> list)
+    {
+        StringBuilder builder = new StringBuilder(list.size());
 
-    public  void is_accepting(){  //nfa accepting states
+        for(Character ch: list)
+        {
+            builder.append(ch);
+        }
+
+        return builder.toString();
+    }
+
+
+    /* Returns accepting states from NFA.*/
+    private  void is_accepting(){
         ArrayList<Integer> accepting = new ArrayList<>();
         ArrayList<trans>states;
         states= new ArrayList<>(nfa.transitions);
         Stack<trans> accepting_stack = new Stack<>();
-        int flag;
 
         for(trans t: states){
             if(t.stateTo == nfa.finalState && t.symp.contains('~')&& t.stateFrom!=0){
@@ -131,14 +134,14 @@ public class Subset_Constructor {
             trans i =accepting_stack.pop();
 
             for(trans t: states){
-                flag = 0;
+
                 if(t.stateTo == i.stateFrom && t.symp.contains('~')&&t.stateFrom!=0){
-                    flag=1;
+
                     accepting_stack.push(t);
                     accepting.add(t.stateFrom);
                 }
 
-                else if(flag==0&&!accepting.contains(nfa.finalState)) {
+                else if(!accepting.contains(nfa.finalState)) {
                     accepting.add((nfa.finalState));
                     break;
                 }
@@ -147,14 +150,12 @@ public class Subset_Constructor {
         }
 
         nfa_accepting_states = accepting;
-        //System.out.println("final state:"+ nfa.finalState);
-        //System.out.println("NFA Accepting States");
-        //System.out.println(nfa_accepting_states);
+
 
     }
 
-
-    public void set_accept_states(DFA dfa){
+    /* Sets DFA accepting states accordingly. */
+    private void set_accept_states(DFA dfa){
         for(int i: nfa_accepting_states){
             for(DFA_State d:dfa.states){
                 if(d.nfa_states.contains(i)&&!accepting_states.contains(d.id)){
@@ -167,6 +168,7 @@ public class Subset_Constructor {
     }
 
 
+    /* Returns generated DFA. */
     public DFA generate_DFA(){
         HashMap <Integer, String> input = new HashMap<>();
         int count = 0;
@@ -184,15 +186,20 @@ public class Subset_Constructor {
         DFA dfa = new DFA();
         DFA_State dead_state = new DFA_State(0);
 
+        // dead state has the id '0' and all it's transitions are zero.
         for(String s: input.values()){
             dead_state.symbol.add(s);
             dead_state.stateTo.add(0);
         }
 
+        // Add the start state to the DFA.
         dfa.add_new_state(dead_state);
+
+        // Start state.
         int state_id = 1;
         ArrayList<trans>initial = new ArrayList<>(get_initial_transitions(nfa.transitions));
-        //return epsilon closure transitions of initial state.
+
+        //return all ϵ transitions of the initial state.
         ArrayList<Integer> Result = new ArrayList<>(epsilon_closure(initial)) ;
         DFA_State dfa_start_state;
 
@@ -212,24 +219,30 @@ public class Subset_Constructor {
         }
 
         Stack<DFA_State> stack = new Stack<>();
+
+        // Push Initial State into the stack.
         stack.push(dfa_start_state);
 
         while(!stack.isEmpty())
         {
-            DFA_State new_state = null;
+            DFA_State new_state;
             DFA_State current = stack.pop();
 
             for(String s: input.values()) {
                 int found =0;
+
+                //returns all transitions of the current state labelled by String s.
                 ArrayList<Integer> to_remove_epsilon = move(current.nfa_states, s);
-                // dead state
+
+                // If the current state has no transitions with the current input
+                // then it goes to the Dead state.
                 if (to_remove_epsilon.size() == 0) {
                     current.stateTo.add(0);
                     current.symbol.add(s);
                     found=1;
 
-
                 }
+
                 ArrayList<trans> to_epsilon = new ArrayList<>();
 
                 for (trans t : nfa.transitions) {
@@ -239,6 +252,8 @@ public class Subset_Constructor {
                         }
                     }
                 }
+
+                // Returns all ϵ transitions of the set of the current state's transitions returned by move.
                 ArrayList<Integer> merged = epsilon_closure(to_epsilon);
 
                 for(int i: to_remove_epsilon){
@@ -251,6 +266,7 @@ public class Subset_Constructor {
                     merged.addAll(to_remove_epsilon);
                 }
 
+                // check if the state is in D-states.
                 for (int i = 0; i < dfa.states.size(); i++) {
                     DFA_State pointer = dfa.states.get(i);
                     if (pointer.nfa_states.containsAll(merged)) {
@@ -259,16 +275,18 @@ public class Subset_Constructor {
                     }
                 }
 
+                // If state is not in D-states then add it to the DFA and push into stack.
                 if (found == 0) {
-                        state_id++;
-                        new_state = new DFA_State(state_id, merged);
-                        stack.push(new_state);
-                        dfa.add_new_state(new_state);
+                    state_id++;
+                    new_state = new DFA_State(state_id, merged);
+                    stack.push(new_state);
+                    dfa.add_new_state(new_state);
 
                 }
             }
         }
 
+        // Add transitions to DFA states.
         for(DFA_State d: dfa.states) {
 
             if (d.stateTo.size() != input.size() || d.symbol.size() != input.size()) {
@@ -329,11 +347,10 @@ public class Subset_Constructor {
             }
         }
 
+
         is_accepting();
 
-        if(dfa!=null) {
-            set_accept_states(dfa);
-        }
+        set_accept_states(dfa);
 
         return dfa;
     }

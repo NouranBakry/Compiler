@@ -1,16 +1,14 @@
-
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Stack;
 
+
+/*Implementation of the Thompson algorithm.*/
 public class Thompson {
 
-    public static ArrayList<Character> tChar = new ArrayList<>();
+    private static ArrayList<Character> tChar = new ArrayList<>();
 
     public static NFA kleene(NFA current) {
-        //System.out.println("ENTER");
-        //current.display();
+
         NFA newNFA = new NFA(current.states.size() + 2);
         tChar.add('~');
         newNFA.transitions.add(new trans(0, 1, tChar));
@@ -30,6 +28,7 @@ public class Thompson {
 
     }
 
+
     public String contain(String input) {
         String output = input;
         for (String name : decider.NFAsub.keySet()) {
@@ -43,6 +42,7 @@ public class Thompson {
         }
         return output;
     }
+
 
     public static NFA question(NFA current) {
         NFA newNFA = new NFA(current.states.size() + 2);
@@ -59,6 +59,7 @@ public class Thompson {
         tChar.clear();
         return newNFA;
     }
+
 
     public static NFA concat(NFA first, NFA second) {
         second.states.remove(0);
@@ -157,15 +158,15 @@ public class Thompson {
     }
 
     public static boolean validateRegEx(String regEx) {
-        //boolean valid = false;
+
         if (regEx.isEmpty()) {
-            System.out.print("your regular expression is empty ya rania bla4 8abawa!!!");
+            System.out.print("Empty Regular expression!");
             return false;
 
         }
         for (char c : regEx.toCharArray()) {
             if (c == '*' || c == '+' || c == '|' || c == '-') {
-                System.out.println("invalid expression");
+                System.out.println("Invalid expression");
                 System.exit(7);
 
             } else {
@@ -178,7 +179,7 @@ public class Thompson {
         for (char c : regEx.toCharArray()) {
 
             if (!validateChar(c)) {
-                System.out.print("aktby sa7 ya bta3t 100% ya rania bla4 8abawa!!!");
+                System.out.print("Invalid Regular Expression!");
                 return false;
 
             }
@@ -192,7 +193,7 @@ public class Thompson {
     public NFA generateNFA(String regex, String condition) {
 
         if (!validateRegEx(regex)) {
-            System.out.println("INVALID regular expression");
+            System.out.println("Invalid regular expression!");
             return new NFA();
         }
 
@@ -218,7 +219,6 @@ public class Thompson {
             }
 
 
-            // if(usedoperator(c)){
 
             if (c == '\\' && i + 1 < regex.length() && (isOperator(regex.charAt(i + 1))|| usedoperator(c)))
                 continue;
@@ -228,12 +228,11 @@ public class Thompson {
                 sBcount++;
                 operands.push(new NFA(tChar));
                 tChar.clear();
-                // if(usedoperator(c)&& i+1<regex.length())
-                //   used++;
+
                 if (sBcount % 2 == 0 || (i + 1 < regex.length() && regex.charAt(i + 1) == '(' || (i+1<regex.length()&&i-1 >= 0 && usedoperator(c)&& !isOperator(regex.charAt(i+1)) &&!usedoperator(regex.charAt(i+1))))) {
 
                     operators.push('.');
-                    //sBcount--;
+
                     if (i + 1 < regex.length() && regex.charAt(i + 1) == '(') {
                         sBcount = 0;
                     }
@@ -250,23 +249,21 @@ public class Thompson {
             }
 
 
-            //}
+
             else if (isOperand(c) && !sBrackets && i + 1 < regex.length() && regex.charAt(i + 1) == '-') {
-                // if(){
-                //   if(){
+
 
                 sBrackets = true;
                 operators.push(c);
                 sBcount++;
-                // }
-                //}
 
 
-                //concatFlag = true;
+
+
 
             } else if (c == '-') {
 
-                //concatFlag = false;
+
                 operators.push(c);
 
             } else if (isOperand(c) && i - 1 >= 0 && regex.charAt(i - 1) == '-') {
@@ -327,7 +324,7 @@ public class Thompson {
                     concatFlag = false;
                     if (count == 0) {
 
-                        System.out.println("ERROR : more ending paranthesis than beginning paranthesis");
+                        System.out.println("ERROR: more ending parentheses than beginning parentheses.");
                         System.exit(2);
 
                     } else {
@@ -429,7 +426,7 @@ public class Thompson {
 
             if (operands.isEmpty()) {
 
-                System.out.println("imbalance operands and operators ya rania matetzakee4 3lna 3eeb !!");
+                System.out.println("Imbalance between operands and operators!");
                 System.exit(3);
             }
 
@@ -487,9 +484,9 @@ public class Thompson {
 
                 operands.push(union(operands.pop(), operands.pop()));
             }
-            //System.out.println("LAST NEEDED : ");
+
             last = operands.pop();
-            //last.display();
+
 
 
 

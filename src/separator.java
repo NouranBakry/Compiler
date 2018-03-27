@@ -1,5 +1,8 @@
+
 public class separator {
+
     public String complete = new String();
+
 
     public separator(String complete) {
         this.complete = complete;
@@ -9,7 +12,7 @@ public class separator {
         int k=0;
         boolean end = false;
         if (one.equals("")) {
-            System.out.println("l line fady ya rania abtadena nstahbel :D");
+            System.out.println("Blank line found.");
             System.exit(9);
 
         }
@@ -19,7 +22,7 @@ public class separator {
         separated[2] = "";
         for (int i = 0; i < one.length(); i++) {
             if (one.charAt(i) == ' ') {
-                //k=i;
+
                 continue;
             }
             else {
@@ -49,7 +52,7 @@ public class separator {
                                         else
                                             separated[2] = "=";
                                         end = true;
-                                        //separated[] += c;
+
 
                                     } else {
                                         separated[0] += c;
@@ -72,7 +75,11 @@ public class separator {
                     separated[0] = one.substring(k + 1, one.length());
                     separated[2] = "{";
 
-                }}} else {
+                }
+            }
+        }
+
+        else {
             for (char c : one.toCharArray()) {
 
 
@@ -86,20 +93,21 @@ public class separator {
                                 separated[2] = "=";
                             separated[1] = "(";
                             end = true;
-                            //separated[] += c;
+
 
                         } else {
                             separated[0] += c;
                         }
 
-                    } else {
+                    }
+                    else {
 
                         separated[1] += c;
-
 
                     }
                 }
             }
+
             if(separated[2] == "="){
                 separated[1] += ')';
             }
