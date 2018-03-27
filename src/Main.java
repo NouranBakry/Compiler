@@ -35,9 +35,9 @@ public class Main {
         accept_states = s.accepting_states;
         DFA dfa_output = s.generate_DFA();
         dfa_output.display_DFA();
-        //DFA_Reducer reducer = new DFA_Reducer(dfa_output);
-        //reducer.BFS();
-        //reducer.partition();
+        DFA_Reducer reducer = new DFA_Reducer(dfa_output);
+        reducer.BFS();
+        reducer.partition();
         System.out.println("Maximal Munch: ");
         Maximal_munch.tokenize();
 

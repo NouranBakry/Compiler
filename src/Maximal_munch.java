@@ -142,7 +142,7 @@ public class Maximal_munch {
         else if (mulop.contains(token))
             System.out.println("mulop");
         else if (Character.isDigit(token.charAt(0)))
-            System.out.println("num");
+            System.out.println("num"+token);
         else
             System.out.println("id"+ token);
 
@@ -163,8 +163,8 @@ public class Maximal_munch {
 
     public static void tokenize() throws FileNotFoundException {
 
-        Scanner input = new Scanner(new File("DFA_output.txt"));
-        String text = new Scanner(new File("DFA_output.txt")).useDelimiter("\\A").next();
+        Scanner input = new Scanner(new File("minimized_output.txt"));
+        String text = new Scanner(new File("minimized_output.txt")).useDelimiter("\\A").next();
         String[] lines = text.split("\\r?\\n");
         String[] s = lines[1].split(" ");
         table = new String[lines.length - 1][s.length];
@@ -185,7 +185,7 @@ public class Maximal_munch {
             System.out.println();
         }
 
-        test = new Scanner(new File("source.txt")).useDelimiter("\\A").next();
+        test = new Scanner(new File("source2.txt")).useDelimiter("\\A").next();
         test = test.replace("\n", " ").replace("\r", "");
 
         initToken();

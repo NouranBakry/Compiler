@@ -1,4 +1,7 @@
+
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Stack;
 
 public class Thompson {
@@ -6,6 +9,8 @@ public class Thompson {
     public static ArrayList<Character> tChar = new ArrayList<>();
 
     public static NFA kleene(NFA current) {
+        //System.out.println("ENTER");
+        //current.display();
         NFA newNFA = new NFA(current.states.size() + 2);
         tChar.add('~');
         newNFA.transitions.add(new trans(0, 1, tChar));
@@ -126,7 +131,7 @@ public class Thompson {
     }
 
     public static boolean usedoperator(char c) {
-        return c==' ' ||c == '\\' || c == '=' || c == '!' || c == '>' || c == '<' || c == '/' || c == ';' || c == '{' || c == '}' || c == ',' || c == ';';
+        return c==' ' ||c == '\\' || c == '=' || c == '!' || c == '>' || c == '<' || c == '/' || c == ';' || c == '{' || c == '}' || c == ','||c == '.';
     }
 
     public static boolean alpha(char c) {
@@ -154,7 +159,7 @@ public class Thompson {
     public static boolean validateRegEx(String regEx) {
         //boolean valid = false;
         if (regEx.isEmpty()) {
-            System.out.print("No regular expression entered!");
+            System.out.print("your regular expression is empty ya rania bla4 8abawa!!!");
             return false;
 
         }
@@ -173,7 +178,7 @@ public class Thompson {
         for (char c : regEx.toCharArray()) {
 
             if (!validateChar(c)) {
-                System.out.print("invalid regular expression!");
+                System.out.print("aktby sa7 ya bta3t 100% ya rania bla4 8abawa!!!");
                 return false;
 
             }
@@ -201,7 +206,7 @@ public class Thompson {
         boolean sBrackets = false;
         int sBcount = 0;
         NFA first, second;
-        boolean used = false;
+        int used = 0;
 
 
         for (int i = 0; i < regex.length(); i++) {
@@ -213,7 +218,7 @@ public class Thompson {
             }
 
 
-
+            // if(usedoperator(c)){
 
             if (c == '\\' && i + 1 < regex.length() && (isOperator(regex.charAt(i + 1))|| usedoperator(c)))
                 continue;
@@ -223,12 +228,16 @@ public class Thompson {
                 sBcount++;
                 operands.push(new NFA(tChar));
                 tChar.clear();
-                if (sBcount % 2 == 0 || (i + 1 < regex.length() && regex.charAt(i + 1) == '(')) {
+                // if(usedoperator(c)&& i+1<regex.length())
+                //   used++;
+                if (sBcount % 2 == 0 || (i + 1 < regex.length() && regex.charAt(i + 1) == '(' || (i+1<regex.length()&&i-1 >= 0 && usedoperator(c)&& !isOperator(regex.charAt(i+1)) &&!usedoperator(regex.charAt(i+1))))) {
 
                     operators.push('.');
+                    //sBcount--;
                     if (i + 1 < regex.length() && regex.charAt(i + 1) == '(') {
                         sBcount = 0;
                     }
+
                 } else if (concatFlag && !sBrackets) {
 
                     operators.push('.');
@@ -241,21 +250,23 @@ public class Thompson {
             }
 
 
-
+            //}
             else if (isOperand(c) && !sBrackets && i + 1 < regex.length() && regex.charAt(i + 1) == '-') {
-
+                // if(){
+                //   if(){
 
                 sBrackets = true;
                 operators.push(c);
                 sBcount++;
+                // }
+                //}
 
 
-
-
+                //concatFlag = true;
 
             } else if (c == '-') {
 
-
+                //concatFlag = false;
                 operators.push(c);
 
             } else if (isOperand(c) && i - 1 >= 0 && regex.charAt(i - 1) == '-') {
@@ -316,7 +327,7 @@ public class Thompson {
                     concatFlag = false;
                     if (count == 0) {
 
-                        System.out.println("ERROR : invalid number of parentheses");
+                        System.out.println("ERROR : more ending paranthesis than beginning paranthesis");
                         System.exit(2);
 
                     } else {
@@ -368,10 +379,11 @@ public class Thompson {
 
                         }
 
-                    }
 
+                    }
                     operators.pop();
-                    if(i+1<regex.length()&&regex.charAt(i+1)=='('){
+                    if(i+1 < regex.length() && ((regex.charAt(i+1) == '(')|| usedoperator(regex.charAt(i+1)))){
+
                         operators.push('.');
                     }
 
@@ -379,10 +391,22 @@ public class Thompson {
 
                     operands.push(kleene(operands.pop()));
                     concatFlag = true;
+                    if(i+1<regex.length()&&usedoperator(regex.charAt(i+1)) && i-1 > 0 && isOperator(regex.charAt(i-1))){
+
+                        operators.push('.');
+                        used =0;
+
+                    }
                 } else if (c == '+') {
 
                     operands.push(positive(operands.pop()));
                     concatFlag = true;
+                    if(i+1<regex.length()&&usedoperator(regex.charAt(i+1)) && i-1 > 0 && isOperator(regex.charAt(i-1))){
+
+                        operators.push('.');
+                        used =0;
+
+                    }
                 } else if (c == '(') {
 
                     operators.push(c);
@@ -396,6 +420,8 @@ public class Thompson {
 
                 }
 
+
+
             }
         }
 
@@ -403,7 +429,7 @@ public class Thompson {
 
             if (operands.isEmpty()) {
 
-                System.out.println("Error: imbalanced operands and operators!");
+                System.out.println("imbalance operands and operators ya rania matetzakee4 3lna 3eeb !!");
                 System.exit(3);
             }
 
@@ -461,8 +487,9 @@ public class Thompson {
 
                 operands.push(union(operands.pop(), operands.pop()));
             }
-
+            //System.out.println("LAST NEEDED : ");
             last = operands.pop();
+            //last.display();
 
 
 
