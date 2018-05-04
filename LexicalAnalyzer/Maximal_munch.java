@@ -198,7 +198,7 @@ public class Maximal_munch {
             }   System.out.println();
         }
 
-        test = new Scanner(new File("source.txt")).useDelimiter("\\A").next();
+        test = new Scanner(new File("program.txt")).useDelimiter("\\A").next();
         test = test.replace("\n", " ").replace("\r", "");
 
         initToken();

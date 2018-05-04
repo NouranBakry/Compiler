@@ -5,7 +5,7 @@ import java.util.Stack;
 
 /*Generates DFA from NFA according to Subset Construction Algorithm. */
 
-public class Subset_Constructor {
+public class  Subset_Constructor {
 
     private static NFA nfa;
     private static Stack <trans> stack = new Stack<>();
