@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ef635c7-cbf1-44d8-8b87-917af342579c" name="Default" comment="" />
+    <list default="true" id="4ef635c7-cbf1-44d8-8b87-917af342579c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/.idea/workspace.xml" afterPath="$PROJECT_DIR$/LexicalAnalyzer/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/.idea/workspace.xml" afterPath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/DFA_output.txt" afterPath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/DFA_output.txt" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/plt.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/plt.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/parser/.idea/workspace.xml" afterPath="$PROJECT_DIR$/parser/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/parser/out/production/parser/Left_Recursion.class" afterPath="$PROJECT_DIR$/parser/out/production/parser/Left_Recursion.class" />
+      <change beforePath="$PROJECT_DIR$/parser/out/production/parser/main.class" afterPath="$PROJECT_DIR$/parser/out/production/parser/main.class" />
+      <change beforePath="$PROJECT_DIR$/parser/src/Left_Recursion.java" afterPath="$PROJECT_DIR$/parser/src/Left_Recursion.java" />
+      <change beforePath="$PROJECT_DIR$/parser/src/main.java" afterPath="$PROJECT_DIR$/parser/src/main.java" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,7 +35,7 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -36,10 +48,16 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="AndroidView" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/LexicalAnalyzer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -167,7 +185,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />

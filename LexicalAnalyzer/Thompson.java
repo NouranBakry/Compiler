@@ -132,7 +132,7 @@ public class Thompson {
     }
 
     public static boolean usedoperator(char c) {
-        return c==' ' ||c == '\\' || c == '=' || c == '!' || c == '>' || c == '<' || c == '/' || c == ';' || c == '{' || c == '}' || c == ','||c == '.';
+        return c==' ' ||c == '\\' || c == '=' || c == '!' || c == '>' || c == '<' || c == '/' || c == ';' || c == '{' || c == '}' || c == ','||c == '.'||c==':';
     }
 
     public static boolean alpha(char c) {

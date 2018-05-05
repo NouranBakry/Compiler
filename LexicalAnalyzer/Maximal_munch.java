@@ -15,15 +15,10 @@ public class Maximal_munch {
     private static String dead = "0";
     private static ArrayList<String>states = new ArrayList<>();
     private static ArrayList<String>accept= new ArrayList <>();
-    private static ArrayList<String>keywords= new ArrayList<>();
-    private static ArrayList<String>relop= new ArrayList<>();
-    private static ArrayList<String>punctuations= new ArrayList<>();
-    private static ArrayList<String>addop= new ArrayList<>();
-    private static ArrayList<String>mulop=new ArrayList<>();
     private static char c;
     private static String[][] table;
     private static Stack s=new Stack();
-    private static String [][] last_accept=new String [10][10];
+    private static String [][] last_accept=new String [1][2];
 
 
 
@@ -32,26 +27,7 @@ public class Maximal_munch {
     }
 
 
-    public static void initToken(){
 
-        String[] str1={"if","while","else","boolean","int","float"};
-        String[] str2={"==","<=",">=","!=","<",">"};
-        String[] str3={",",";","(",")","{","}","[","]"};
-        String[] str4={"+","-"};
-        String[] str5={"*","/"};
-        for (String s : str1)
-            keywords.add(s);
-        for (String s : str2)
-            relop.add(s);
-        for (String s : str3)
-            punctuations.add(s);
-        for (String s : str4)
-            addop.add(s);
-        for (String s : str5)
-            mulop.add(s);
-
-
-    }
 
     public static String maximalMunch(){
         i=0;
@@ -59,14 +35,16 @@ public class Maximal_munch {
             String q=start;
             String d="";
 
+
             last_accept[0][0]="error";
             last_accept[0][1]=String.valueOf(i);
             s.push(last_accept);
 
             while(i<test.length() && !dead.equals(q)){
                 int flag=0;
-                if(accept.contains(q))
-                    s.clear();
+
+                if(accept.contains(q)){
+                    s.clear();}
                 last_accept[0][0]=q;
                 last_accept[0][1]=String.valueOf(i);
                 s.push(last_accept);
@@ -111,16 +89,18 @@ public class Maximal_munch {
 
             while(!accept.contains(q) && !s.isEmpty()){
 
-                if(!s.isEmpty())
+
+                if(!s.isEmpty()){
+
                     last_accept=(String[][]) s.pop();
-                q=last_accept[0][0];
-                i=Integer.parseInt(last_accept[0][1]);
+                    q=last_accept[0][0];
+                    i=Integer.parseInt(last_accept[0][1]);
 
-                if(last_accept[0][0]=="error"){
-                    System.out.println("Failed: unable to tokenize");
-                    return "Failed: unable to tokenize";
+                    if(last_accept[0][0]=="error"){
+                        System.out.println("Failed: unable to tokenize");
+                        return "Failed: unable to tokenize";
+                    }
                 }
-
                 for (int t = token_beginning; t<i; t++){
                     d=d+test.charAt(t);
                     token_beginning =i;}
@@ -141,19 +121,23 @@ public class Maximal_munch {
 
     private static void getToken(String token){
 
-        if(keywords.contains(token))
+        if(decider.keywords.contains(token))
             System.out.println(token);
-        else if(relop.contains(token))
-            System.out.println("relop");
-        else if(punctuations.contains(token))
-            System.out.println(token);
-        else if(token.equals("="))
+        else if(decider.assign.contains(token))
             System.out.println("assign");
+        else if(decider.relop.contains(token))
+            System.out.println("relop");
+        else if(decider.punctuations.contains(token))
+            System.out.println(token);
         else if(token.equals(" "))
             ;
-        else if(addop.contains(token))
+        else if(decider.incop.contains(token))
+            System.out.println("incop");
+        else if(decider.decop.contains(token))
+            System.out.println("deccop");
+        else if(decider.addop.contains(token))
             System.out.println("addop");
-        else if(mulop.contains(token))
+        else if(decider.mulop.contains(token))
             System.out.println("mulop");
         else if(Character.isDigit(token.charAt(0)))
             System.out.println("num= "+token);
@@ -198,10 +182,17 @@ public class Maximal_munch {
             }   System.out.println();
         }
 
-        test = new Scanner(new File("program.txt")).useDelimiter("\\A").next();
-        test = test.replace("\n", " ").replace("\r", "");
+        test = new Scanner(new File("source.txt")).useDelimiter("\\A").next();
+        lines = test.split("\\r?\\n");
+        test="";
+        for (int r=0;r<lines.length;r++){
+            test+=lines[r].trim();
+            if(r<lines.length-1)
+                test+=" ";
 
-        initToken();
+        }
+
+
 
         String token= maximalMunch();
 

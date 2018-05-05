@@ -10,7 +10,7 @@ public class main {
 
     public static void main(String[] args) throws IOException {
 
-        String fileName = "test.txt";
+        String fileName = "input.txt";
         File file = new File(fileName);
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -30,8 +30,10 @@ public class main {
 //        System.out.println("START STATE : "+lastCFG.start);
 //        System.out.println("TERMINALS : "+lastCFG.terminal);
 //        System.out.println("NON-TERMINALS : "+lastCFG.nonTerminal);
-        System.out.println("PRODUCTIONS : "+lastCFG.productions);
-        Left_Recursion left_recursion = new Left_Recursion(lastCFG);
-        left_recursion.eliminate();
+//        System.out.println("PRODUCTIONS : "+lastCFG.productions);
+//        Left_Recursion left_recursion = new Left_Recursion(lastCFG);
+//        left_recursion.eliminate();
+        first_follow test=new first_follow(lastCFG);
+        test.first();
     }
 }

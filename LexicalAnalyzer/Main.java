@@ -28,8 +28,9 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("NFA :");
-        last.display();
+      /*  System.out.println("NFA :");
+        last.display();*/
+
         DFA dfa = new DFA(last);
         Subset_Constructor s = new Subset_Constructor(last);
         accept_states = s.accepting_states;

@@ -1,17 +1,19 @@
-letter = a-z | A-Z 
-digit = 0 - 9 
-id: letter (letter|digit)*
-digits = digit+
-{boolean int float}
-num: digit+ | digit+ \. digits ( \L | E digits)
-assign: =
-{ if else while }
-relop: \=\= | !\= | > | >\= | < | <\=
-addop:\+|\-
-mulop:\*|/
+letter =a-z|A-Z
+digit =0-9
+digits =digit+
+{ program var integer }
+num :digit+|digits.digits(\L|Edigit+)
+relop :\=|<>|>|>\=|<|<\=
+assign :\=
+{ real begin end if else then while do read write }
+addop :\+|\-
+mulop :\*|/
+incop :\+\+
+decop :\-\-
+.:.
 ;:;
+,:,
 (:\(
 ):\)
-{:{
-}:}
-,:,
+point:\:
+id :letter(letter|digit)*

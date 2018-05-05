@@ -1,4 +1,3 @@
-
 public class separator {
 
     public String complete = new String();
