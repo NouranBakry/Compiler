@@ -1,0 +1,5 @@
+letter = a-z | A-Z 
+digit = 0 - 9
+
+digits = digit+
+num: digit+ | digit+ . digits ( \L | E digits)
