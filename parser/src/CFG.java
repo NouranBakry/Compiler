@@ -32,7 +32,7 @@ public class CFG {
             ArrayList <String> currentProductions = new ArrayList<String>();
             nonTerminal.add(k);
             String value = main.lines.get(k);
-            System.out.println(k+"\t"+value);
+//            System.out.println(k+"\t"+value);
             for (int i = 0 ; i < value.length() ; i++) {
                 char C = value.charAt(i);
                 if (C == '‘') {

@@ -10,7 +10,7 @@ public class main {
 
     public static void main(String[] args) throws IOException {
 
-        String fileName = "input.txt";
+        String fileName = "shahenda.txt";
         File file = new File(fileName);
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -28,12 +28,12 @@ public class main {
         CFG myCFG = new CFG();
         CFG lastCFG = myCFG.controlCFG();
 //        System.out.println("START STATE : "+lastCFG.start);
-//        System.out.println("TERMINALS : "+lastCFG.terminal);
+        System.out.println("TERMINALS : "+lastCFG.terminal);
 //        System.out.println("NON-TERMINALS : "+lastCFG.nonTerminal);
-//        System.out.println("PRODUCTIONS : "+lastCFG.productions);
-//        Left_Recursion left_recursion = new Left_Recursion(lastCFG);
-//        left_recursion.eliminate();
-        first_follow test=new first_follow(lastCFG);
-        test.first();
+        System.out.println("PRODUCTIONS : "+lastCFG.productions);
+        Left_Recursion left_recursion = new Left_Recursion(lastCFG);
+        CFG unambigous= left_recursion.eliminate();
+//        first_follow test=new first_follow(lastCFG);
+//        test.first();
     }
 }
