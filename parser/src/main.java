@@ -10,7 +10,7 @@ public class main {
 
     public static void main(String[] args) throws IOException {
 
-        String fileName = "shahenda.txt";
+        String fileName = "input.txt";
         File file = new File(fileName);
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -27,13 +27,22 @@ public class main {
         myConst.separateLines();
         CFG myCFG = new CFG();
         CFG lastCFG = myCFG.controlCFG();
+
 //        System.out.println("START STATE : "+lastCFG.start);
-        System.out.println("TERMINALS : "+lastCFG.terminal);
+//        System.out.println("TERMINALS : "+lastCFG.terminal);
 //        System.out.println("NON-TERMINALS : "+lastCFG.nonTerminal);
+
+
         System.out.println("PRODUCTIONS : "+lastCFG.productions);
-        Left_Recursion left_recursion = new Left_Recursion(lastCFG);
-        CFG unambigous= left_recursion.eliminate();
-//        first_follow test=new first_follow(lastCFG);
-//        test.first();
+        LL1 l = new LL1(lastCFG);
+        CFG ambuguity_free = l.eliminate();
+
+//        first_follow fst=new first_follow(ambiguity_free);
+//        for(String k:ambiguity_free.nonTerminal){
+//            System.out.println("first of non terminal "+k+" : ");
+//            fst.first(k);
+//        }
+
+
     }
 }
