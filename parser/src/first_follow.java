@@ -24,13 +24,13 @@ public class first_follow {
 
     }
 
-    public String first(String firstToken){
+    public String first(String firstToken,ArrayList f){
         String str="";
         ArrayList<String>LHS=new ArrayList<>();
         ArrayList<String>nonTERMINAL=new ArrayList<>();
         ArrayList<String>TERMINAL=new ArrayList<>();
         ArrayList<String>first=new ArrayList<>();
-        ArrayList<String>tokens=new ArrayList<>();
+        // ArrayList<String>tokens=new ArrayList<>();
         for(String z:nonterminals){
             nonTERMINAL.add(z);
         }
@@ -41,12 +41,13 @@ public class first_follow {
             TERMINAL.add(t);
         }
         firstToken=firstToken.split(" ")[0];
-        tokens.add(firstToken);
+        //tokens.add(firstToken);
 
         if(TERMINAL.contains(firstToken)){
             str=firstToken;
             first.add(str);
             System.out.println(first);
+            f.add(str);
 
         }
 
@@ -54,18 +55,24 @@ public class first_follow {
             str=firstToken;
             first.add(str);
             System.out.println(first);
+            f.add(str);
         }
 
         else{
             if(nonTERMINAL.contains(firstToken)){
                 for(String m:production.get(firstToken)){
                     //System.out.println("right = "+m);
-                    first(m);
+                    first(m,f);
                 }
             }
         }
 
         return str;
+
+    }
+
+
+    public void follow(){
 
     }
 

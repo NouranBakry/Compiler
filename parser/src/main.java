@@ -1,12 +1,11 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 
 public class main {
     public static Map<String,String> lines= new LinkedHashMap<>();
     public static ArrayList<String> fileIndex = new ArrayList<>();
+    public static LinkedHashMap<String,String[]> Fmap = new LinkedHashMap<>();
 
     public static void main(String[] args) throws IOException {
 
@@ -37,12 +36,29 @@ public class main {
         LL1 l = new LL1(lastCFG);
         CFG ambuguity_free = l.eliminate();
 
-//        first_follow fst=new first_follow(ambiguity_free);
-//        for(String k:ambiguity_free.nonTerminal){
-//            System.out.println("first of non terminal "+k+" : ");
+        first_follow fst=new first_follow(ambuguity_free);
+        for(String k:ambuguity_free.nonTerminal){
+            ArrayList<String> temp = new ArrayList<>();
+            System.out.println("first of "+k+" : ");
+            fst.first(k,temp);
+            //System.out.println(temp);
+            String temp2[] = new String[temp.size()];
+            temp2 = temp.toArray(temp2);
+            Fmap.put(k,temp2);
+
+
+        }
+
+        parserTable myTable = new parserTable(ambuguity_free,fst);
+        myTable.createTable();
+
+
+        //first_follow fst=new first_follow(lastCFG);
+//        for(String k:lastCFG.nonTerminal){
 //            fst.first(k);
+//
 //        }
 
-
+        //fst.first(lastCFG.start);
     }
 }
