@@ -44,7 +44,7 @@ public class LL1 {
             /*Non immediate left recursion Elimination.*/
             for(int k = 1; k< left.size(); k++){
                 String temp = "";
-                if(left.get(i)!=left.get(k)&& !non_terminals.contains(left.get(k))) {
+                if(left.get(i)!=left.get(k)&&!non_terminals.contains(left.get(k))) {
                     right = productions.get(left.get(k));
                     for (String s : right) {
                         if (s.equals(left.get(i))) {
@@ -62,7 +62,6 @@ public class LL1 {
                     right.addAll(s);
                 }
             }
-
             /*Immediate left recursion Elimination.*/
             for(int j=0;j<right.size();j++){
                 if(right.get(j).startsWith(left.get(i))){
@@ -75,7 +74,8 @@ public class LL1 {
                 }
                 ArrayList<String> y = productions.get(left.get(i));
                 for(String z: y){
-                if(Recursive && !z.equals(right.get(j))){
+//                    System.out.println("right: "+ right.get(j));
+                if(Recursive && !z.contains(right.get(j))){
                     Beta += z+" ";
                     Beta += new_left;
                     if (!Beta.isEmpty()){
@@ -85,9 +85,9 @@ public class LL1 {
                 }
             }
         }
-
             if(!A.isEmpty()&&!new_left.isEmpty()){
                 new_rules.add("~"); // epsilon
+//                System.out.println(A);
                 new_productions.put(left.get(i),A);
                 new_productions.put(new_left, new_rules);
             }
@@ -98,13 +98,13 @@ public class LL1 {
         }
         new_non_terminals.addAll(new_productions.keySet());
         if(new_non_terminals.equals(non_terminals)){
-            System.out.println("No left recursion");
+//            System.out.println("No left recursion");
         }
         else {
-            System.out.println("This grammar had left recursion");
-            System.out.println("PRODUCTIONS: "+ new_productions);
-            System.out.println("terminals: "+this.terminals);
-            System.out.println("non terminals: "+ new_non_terminals);
+//            System.out.println("This grammar had left recursion");
+//            System.out.println("PRODUCTIONS: "+ new_productions);
+//            System.out.println("terminals: "+this.terminals);
+//            System.out.println("non terminals: "+ new_non_terminals);
         }
 
 
@@ -171,13 +171,13 @@ public class LL1 {
 
         final_nonterminals.addAll(final_productions.keySet());
         if (final_nonterminals.equals(new_non_terminals)){
-            System.out.println("No left factoring");
+//            System.out.println("No left factoring");
         }
         else{
-            System.out.println("This grammar required Left factoring");
-            System.out.println("PRODUCTIONS: "+ final_productions);
-            System.out.println("terminals: "+ this.terminals);
-            System.out.println("non terminals: "+ final_nonterminals);
+//            System.out.println("This grammar required Left factoring");
+//            System.out.println("PRODUCTIONS: "+ final_productions);
+//            System.out.println("terminals: "+ this.terminals);
+//            System.out.println("non terminals: "+ final_nonterminals);
         }
 
 

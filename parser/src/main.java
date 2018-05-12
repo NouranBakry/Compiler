@@ -30,35 +30,24 @@ public class main {
 //        System.out.println("START STATE : "+lastCFG.start);
 //        System.out.println("TERMINALS : "+lastCFG.terminal);
 //        System.out.println("NON-TERMINALS : "+lastCFG.nonTerminal);
-
-
-        System.out.println("PRODUCTIONS : "+lastCFG.productions);
+//        System.out.println("PRODUCTIONS : "+lastCFG.productions);
         LL1 l = new LL1(lastCFG);
         CFG ambuguity_free = l.eliminate();
-
         first_follow fst=new first_follow(ambuguity_free);
         for(String k:ambuguity_free.nonTerminal){
             ArrayList<String> temp = new ArrayList<>();
-            System.out.println("first of "+k+" : ");
+//            System.out.println("first of "+k+" : ");
             fst.first(k,temp);
             //System.out.println(temp);
             String temp2[] = new String[temp.size()];
             temp2 = temp.toArray(temp2);
             Fmap.put(k,temp2);
-
-
         }
 
-        parserTable myTable = new parserTable(ambuguity_free,fst);
-        myTable.createTable();
+        fst.follow();
+//        parserTable myTable = new parserTable(ambuguity_free,fst);
+//        myTable.createTable();
 
 
-        //first_follow fst=new first_follow(lastCFG);
-//        for(String k:lastCFG.nonTerminal){
-//            fst.first(k);
-//
-//        }
-
-        //fst.first(lastCFG.start);
     }
 }

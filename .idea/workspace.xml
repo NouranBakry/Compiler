@@ -4,14 +4,12 @@
     <list default="true" id="4ef635c7-cbf1-44d8-8b87-917af342579c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/.idea/workspace.xml" afterPath="$PROJECT_DIR$/LexicalAnalyzer/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/.idea/workspace.xml" afterPath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/DFA_output.txt" afterPath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/DFA_output.txt" />
-      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/plt.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/plt.txt" afterPath="" />
       <change beforePath="$PROJECT_DIR$/parser/.idea/workspace.xml" afterPath="$PROJECT_DIR$/parser/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/parser/out/production/parser/Left_Recursion.class" afterPath="$PROJECT_DIR$/parser/out/production/parser/Left_Recursion.class" />
+      <change beforePath="$PROJECT_DIR$/parser/out/production/parser/LL1.class" afterPath="$PROJECT_DIR$/parser/out/production/parser/LL1.class" />
+      <change beforePath="$PROJECT_DIR$/parser/out/production/parser/first_follow.class" afterPath="$PROJECT_DIR$/parser/out/production/parser/first_follow.class" />
       <change beforePath="$PROJECT_DIR$/parser/out/production/parser/main.class" afterPath="$PROJECT_DIR$/parser/out/production/parser/main.class" />
-      <change beforePath="$PROJECT_DIR$/parser/src/Left_Recursion.java" afterPath="$PROJECT_DIR$/parser/src/Left_Recursion.java" />
+      <change beforePath="$PROJECT_DIR$/parser/src/LL1.java" afterPath="$PROJECT_DIR$/parser/src/LL1.java" />
+      <change beforePath="$PROJECT_DIR$/parser/src/first_follow.java" afterPath="$PROJECT_DIR$/parser/src/first_follow.java" />
       <change beforePath="$PROJECT_DIR$/parser/src/main.java" afterPath="$PROJECT_DIR$/parser/src/main.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,6 +21,70 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GotoFileConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="AIDL" />
+      <filtered-out-file-type name="APK" />
+      <filtered-out-file-type name="ARCHIVE" />
+      <filtered-out-file-type name="Adobe Photoshop" />
+      <filtered-out-file-type name="Allocations" />
+      <filtered-out-file-type name="Android Nine-Patch" />
+      <filtered-out-file-type name="Android RenderScript" />
+      <filtered-out-file-type name="AndroidDataBinding" />
+      <filtered-out-file-type name="AspectJ" />
+      <filtered-out-file-type name="C#" />
+      <filtered-out-file-type name="C++" />
+      <filtered-out-file-type name="CLASS" />
+      <filtered-out-file-type name="CSS" />
+      <filtered-out-file-type name="DTD" />
+      <filtered-out-file-type name="Eclipse" />
+      <filtered-out-file-type name="Enforced Plain Text" />
+      <filtered-out-file-type name="Erlang" />
+      <filtered-out-file-type name="GUI_DESIGNER_FORM" />
+      <filtered-out-file-type name="Groovy" />
+      <filtered-out-file-type name="HTML" />
+      <filtered-out-file-type name="Haskell" />
+      <filtered-out-file-type name="Hprof" />
+      <filtered-out-file-type name="IDEA_MODULE" />
+      <filtered-out-file-type name="IDEA_PROJECT" />
+      <filtered-out-file-type name="IDEA_WORKSPACE" />
+      <filtered-out-file-type name="IDL" />
+      <filtered-out-file-type name="Images" />
+      <filtered-out-file-type name="JAVA" />
+      <filtered-out-file-type name="JQL" />
+      <filtered-out-file-type name="JSHELL" />
+      <filtered-out-file-type name="JSON" />
+      <filtered-out-file-type name="JSP" />
+      <filtered-out-file-type name="JavaFX" />
+      <filtered-out-file-type name="JavaScript" />
+      <filtered-out-file-type name="KJSM" />
+      <filtered-out-file-type name="Kotlin" />
+      <filtered-out-file-type name="Layout Inspector" />
+      <filtered-out-file-type name="Manifest" />
+      <filtered-out-file-type name="Native" />
+      <filtered-out-file-type name="PATCH" />
+      <filtered-out-file-type name="PHP" />
+      <filtered-out-file-type name="PLAIN_TEXT" />
+      <filtered-out-file-type name="Perl" />
+      <filtered-out-file-type name="ProGuard File" />
+      <filtered-out-file-type name="Properties" />
+      <filtered-out-file-type name="RNG Compact" />
+      <filtered-out-file-type name="RegExp" />
+      <filtered-out-file-type name="ResourceBundle" />
+      <filtered-out-file-type name="SPI" />
+      <filtered-out-file-type name="SQL" />
+      <filtered-out-file-type name="SVG" />
+      <filtered-out-file-type name="Scratch" />
+      <filtered-out-file-type name="UNKNOWN" />
+      <filtered-out-file-type name="VmTrace" />
+      <filtered-out-file-type name="XHTML" />
+      <filtered-out-file-type name="XML" />
+      <filtered-out-file-type name="YAML" />
+      <filtered-out-file-type name="YouTrack" />
+      <filtered-out-file-type name="kotlin_builtins" />
+      <filtered-out-file-type name="kotlin_module" />
+    </file-type-list>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -49,15 +111,18 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="ProjectPane" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -206,5 +271,78 @@
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

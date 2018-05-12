@@ -1,13 +1,12 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Set;
+
 
 public class parserTable {
 
     CFG tempCFG;
     first_follow tempFirstFollow;
-    String table[][];
+    public static String table[][];
 
     public parserTable(CFG tempCFG,first_follow tempFirstFollow) {
         this.tempCFG = tempCFG;
@@ -76,6 +75,7 @@ public class parserTable {
                             System.exit(90);
                         }
                         table[i+1][j+1] = temp;
+                         System.out.println( table[i+1][0]+" -> "+table[0][j+1]+" -> "+temp);
                         break;
 
                     }
@@ -90,38 +90,45 @@ public class parserTable {
 
     private static String getProduction(String nonTerminal, String terminal,CFG last){
         String production= new String();
-        String fullPro=new String();
+       ArrayList <String>fullPro = new ArrayList<>();
         boolean moreThanOne = false;
 
         ArrayList temp = last.productions.get(nonTerminal);
-        ArrayList <String>temp2 = new ArrayList<>();
+        ArrayList <String>temp2 = new ArrayList<>();      
         for(int value = 0 ; value<temp.size();value++){
-            fullPro = temp.get(value).toString();
-            String parts[] = temp.get(value).toString().split(" ");
-            for (int part = 0 ; part<parts.length ; part++){
-                temp2.add(parts[part]);
+            fullPro.add(temp.get(value).toString()); // System.out.println(" fullPro  "+fullPro);
+            String parts[] = temp.get(value).toString().split(" ");  
+            for (int part = 0 ; part<parts.length ; part++){             
+                temp2.add(new String(String.valueOf(value)+"-"+parts[part]));
             }
 
         }
         if(temp2.size()>1)
             moreThanOne = true;
-
+        int flag=0;
         for(int i = 0 ; i < temp2.size();i++){
-            String k = temp2.get(i).toString();
-            int result = found(k,terminal);
+            String[] k = temp2.get(i).toString().split("-", 2);  //System.out.println(" k : "+k[1]);
+            int result = found(k[1],terminal);  
             if(result == 1){
                 if(moreThanOne){
-                    production=fullPro.toString();
+                    production=fullPro.get(Integer.parseInt(k[0]));  //System.out.println(" production  "+production);
                     moreThanOne = false;
 
                 }
                 else{
-                    production = k;
+                    production = k[1];
                 }
+                 return production;
             }
-            else if(result == 3)
-                production = terminal;
-            return production;
+            else if(result == 3){
+               // if()
+                production = fullPro.get(Integer.parseInt(k[0])); 
+                 return production;
+            }
+            else if(result == 0)
+                continue;
+                
+           
         }
 
         return null;
@@ -130,11 +137,12 @@ public class parserTable {
 
     private static int found(String nonTerminal, String terminl){
 
-        if(main.Fmap.get(nonTerminal) == null){
+      if(main.Fmap.get(nonTerminal) == null){  // System.out.println(nonTerminal+"   "+Main.Fmap.get(nonTerminal));
             return 3;
         }
         String first[] = main.Fmap.get(nonTerminal);
         for(int i = 0 ; i < first.length ; i++){
+           //System.out.println(nonTerminal+"   "+terminl+"   "+first[i].equals(terminl));
             if(first[i].equals(terminl))
                 return 1;}
 
