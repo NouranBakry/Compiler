@@ -1,2 +1,0 @@
-#S=Aa | b
-#A=Ac | Sd | f

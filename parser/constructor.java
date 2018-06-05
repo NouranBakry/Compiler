@@ -1,8 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Set;
 
 public class constructor {
 
@@ -31,7 +27,7 @@ public class constructor {
 
                 } else if (C == '#' ) {
                     if(line == 0)continue;
-                    main.lines.put(part1, part2);
+                    Main.lines.put(part1, part2);
                     part1 = "";
                     part2 = "";
                     change = false;
@@ -44,7 +40,7 @@ public class constructor {
                 }
             }
         }
-        main.lines.put(part1,part2);
+        Main.lines.put(part1,part2);
         //System.out.println(main.lines);
         //Set keys = main.lines.keySet();
         //System.out.println(keys);

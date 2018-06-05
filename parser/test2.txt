@@ -1,3 +1,0 @@
-#P=P ; Def | Def
-#Def=id(id)=E
-#E=id | num | (EE) | (E+E) | [E,E]

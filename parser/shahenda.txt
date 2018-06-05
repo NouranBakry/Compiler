@@ -1,3 +1,0 @@
-#bexpr=bexpr ‘or’ bterm | bterm
-#bterm= bterm ‘and’ bfactor | bfactor
-#bfactor= ‘not’ bfactor|‘(’ bexpr ‘)’|‘true’|‘false’

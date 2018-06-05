@@ -1,10 +1,10 @@
 import java.util.*;
 
 public class CFG {
-    ArrayList <String> terminal = new ArrayList<>();
-    ArrayList <String> nonTerminal = new ArrayList<>();
+    public static ArrayList <String> terminal = new ArrayList<>();
+    public static ArrayList <String> nonTerminal = new ArrayList<>();
     public Map<String,ArrayList<String>> productions = new LinkedHashMap<>();
-    String start = new String();
+    public static String start = new String();
 
 
     public CFG(ArrayList terminal1,ArrayList nonTerminal1,Map productions1,String start1) {
@@ -22,7 +22,7 @@ public class CFG {
     }
 
     public CFG controlCFG(){
-        Set<String> keys = main.lines.keySet();
+        Set<String> keys = Main.lines.keySet();
         start = keys.iterator().next();
         for(String k : keys){
             int t = 0;
@@ -31,7 +31,7 @@ public class CFG {
             String currentTerminal = new String("");
             ArrayList <String> currentProductions = new ArrayList<String>();
             nonTerminal.add(k);
-            String value = main.lines.get(k);
+            String value = Main.lines.get(k);
 //            System.out.println(k+"\t"+value);
             for (int i = 0 ; i < value.length() ; i++) {
                 char C = value.charAt(i);

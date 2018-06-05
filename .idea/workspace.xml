@@ -2,15 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ef635c7-cbf1-44d8-8b87-917af342579c" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/.idea/workspace.xml" afterPath="$PROJECT_DIR$/LexicalAnalyzer/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/DFA.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/DFA_Reducer.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/DFA_State.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/Main.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/Maximal_munch.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/NFA.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/Subset_Constructor.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/Thompson.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/decider.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/separator.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer/out/production/LexicalAnalyzer/trans.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/parser/.idea/misc.xml" afterPath="$PROJECT_DIR$/parser/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/parser/.idea/modules.xml" afterPath="$PROJECT_DIR$/parser/.idea/modules.xml" />
       <change beforePath="$PROJECT_DIR$/parser/.idea/workspace.xml" afterPath="$PROJECT_DIR$/parser/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/parser/out/production/parser/LL1.class" afterPath="$PROJECT_DIR$/parser/out/production/parser/LL1.class" />
-      <change beforePath="$PROJECT_DIR$/parser/out/production/parser/first_follow.class" afterPath="$PROJECT_DIR$/parser/out/production/parser/first_follow.class" />
-      <change beforePath="$PROJECT_DIR$/parser/out/production/parser/main.class" afterPath="$PROJECT_DIR$/parser/out/production/parser/main.class" />
+      <change beforePath="$PROJECT_DIR$/parser/out/production/parser/CFG.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/parser/out/production/parser/LL1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/parser/out/production/parser/constructor.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/parser/out/production/parser/first_follow.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/parser/out/production/parser/main.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/parser/out/production/parser/parserTable.class" afterPath="" />
       <change beforePath="$PROJECT_DIR$/parser/src/LL1.java" afterPath="$PROJECT_DIR$/parser/src/LL1.java" />
       <change beforePath="$PROJECT_DIR$/parser/src/first_follow.java" afterPath="$PROJECT_DIR$/parser/src/first_follow.java" />
-      <change beforePath="$PROJECT_DIR$/parser/src/main.java" afterPath="$PROJECT_DIR$/parser/src/main.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -111,15 +127,15 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/parser" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />

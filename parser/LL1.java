@@ -74,20 +74,18 @@ public class LL1 {
                 }
                 ArrayList<String> y = productions.get(left.get(i));
                 for(String z: y){
-//                    System.out.println("right: "+ right.get(j));
-                if(Recursive && !z.contains(right.get(j))){
-                    Beta += z+" ";
-                    Beta += new_left;
-                    if (!Beta.isEmpty()){
-                        A.add(Beta);
-                        Beta="";
+                    if(Recursive && !z.contains(right.get(j))){
+                        Beta += z+" ";
+                        Beta += new_left;
+                        if (!Beta.isEmpty()){
+                            A.add(Beta);
+                            Beta="";
+                        }
                     }
                 }
             }
-        }
             if(!A.isEmpty()&&!new_left.isEmpty()){
                 new_rules.add("~"); // epsilon
-//                System.out.println(A);
                 new_productions.put(left.get(i),A);
                 new_productions.put(new_left, new_rules);
             }
@@ -124,15 +122,15 @@ public class LL1 {
             for (String r: right){
                 String temp;
                 if(r.contains(" ")){
-                temp = r.split(" ")[0];
+                    temp = r.split(" ")[0];
                 }
                 else temp = r;
                 if(!temp.equals("~")){
-                if(firsts.containsKey(temp)){
-                    firsts.put(temp,firsts.get(temp)+1);
+                    if(firsts.containsKey(temp)){
+                        firsts.put(temp,firsts.get(temp)+1);
+                    }
+                    else firsts.put(temp,1);
                 }
-                else firsts.put(temp,1);
-            }
             }
             for(String y: firsts.keySet()){
                 if (firsts.get(y) > 1&&!Factoring){
